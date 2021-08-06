@@ -81,37 +81,37 @@ export default class SignUpModal extends Component {
                     <Form onSubmit= {this.handleRegister}>
                         <Form.Group className="mb-3" controlId="formFirstName">
                             <Form.Label>First Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter First Name" onChange={(e)=> {this.state.firstName=e.target.value}}/>
+                            <Form.Control type="text" placeholder="Enter First Name" onChange={(e)=>{this.setState({firstName:e.target.value})}}/>
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formLastName">
                             <Form.Label>Last Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Last Name" onChange={(e)=> {this.state.lastName=e.target.value}}/>
+                            <Form.Control type="text" placeholder="Enter Last Name" onChange={(e)=> {this.setState({lastName:e.target.value})}} />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formUserName">
                             <Form.Label>User Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter UserName" onChange={(e)=> {this.state.userName=e.target.value}}/>
+                            <Form.Control type="text" placeholder="Enter UserName" onChange={(e)=> {this.setState({userName:e.target.value})}}/>
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formPhoneNumber">
                             <Form.Label>Phone number</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Phone Number" onChange={(e)=> {this.state.phoneNo=e.target.value}}/>
+                            <Form.Control type="text" placeholder="Enter Phone Number" onChange={(e)=> {this.setState({phoneNo:e.target.value})}}/>
                         </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" onChange={(e)=> {this.state.emailId=e.target.value}}/>
+                        <Form.Control type="email" placeholder="Enter email" onChange={(e)=> {this.setState({emailId:e.target.value})}}/>
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" onChange={(e)=> {this.state.password=e.target.value}}/>
+                        <Form.Control type="password" placeholder="Password" onChange={(e)=> {this.setState({password:e.target.value})}}/>
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicControlPassword">
                         <Form.Label>Confirm-Password</Form.Label>
-                        <Form.Control type="confirm-password" placeholder="Password" onChange={(e)=> {this.state.confirmPassword=e.target.value}}/>
+                        <Form.Control type="confirm-password" placeholder="Password" onChange={(e)=> {this.setState({confirmPassword:e.target.value})}}/>
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicCheckbox">
