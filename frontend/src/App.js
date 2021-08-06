@@ -3,7 +3,7 @@ import { Container, Nav, Navbar, Form , NavDropdown, FormControl, Button} from '
 import {Route, HashRouter} from 'react-router-dom';
 import Home from './Components/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Travel from './Components/Travel';
+import Travel from './Components/Travel/Travel';
 import Food from './Components/Food';
 import Blog from './Components/Blog';
 import LoginModal from './Components/LoginModal';
