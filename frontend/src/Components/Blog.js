@@ -1,6 +1,9 @@
 import React, {Component} from "react";
+import { Nav } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
 import { Container, Row, Image, Carousel, Col, Form,Button, Dropdown } from "react-bootstrap";
-import { Route } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
+import BlogWithTag from "./BlogWithTag";
 
 class Blog extends Component{
     
@@ -12,7 +15,8 @@ class Blog extends Component{
             content:'Write something here',
             postTag:'Select Tag',
             color:'grey',
-            tagsList:['Sports','Food','Travel','Tech','Funny','Miscellaneous']
+            tagsList:['Sports','Food','Travel','Tech','Funny','Miscellaneous'],
+            selectedTag:'none'
         }
     }
 
@@ -20,7 +24,7 @@ class Blog extends Component{
 
         const formSubmit = (e) =>{
             e.preventDefault()
-            const blog={
+            const blog={ //add user id
                 head:this.state.heading,
                 content:this.state.content,
                 tag:this.state.postTag
@@ -76,20 +80,21 @@ class Blog extends Component{
                     </Form>
                 </Row>
                 <Row>
-                    <Col>
-                        <ul>
-                            {
-                                this.props.blogs.map( (blog) => (
-                                    <li>{blog.tag}</li> 
-                                    // Nav link here
-                                ))
-                            }
-                        </ul>
+                    <Col md={2}>
+                        <Navbar>
+                            <Nav className="flex-column">
+                                {
+                                    this.state.tagsList.map((tag)=>{
+                                        const lnk = 'blog/'+tag;
+                                        return <Nav.Link key={tag} onClick={(e)=> this.setState({selectedTag:tag})} >{tag}</Nav.Link>
+                                        
+                                    })
+                                }
+                            </Nav>
+                        </Navbar>
                     </Col>
-                    <Col>
-                        <div>
-                            {/* Route here */}
-                        </div>
+                    <Col md={7}>
+                        <BlogWithTag tag={this.state.selectedTag}/>
                     </Col>
                     <Col>
                         <div>
