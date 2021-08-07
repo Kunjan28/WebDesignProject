@@ -157,7 +157,9 @@ exports.delete = (req, res) => {
 
 exports.getPosts = (req, res) => {
   User.findOne({ userName: req.body.userName })
-    .populate('posts')
+    .populate({path:"posts", populate : {
+      path : 'comments'}
+    })
     .then((result) => {
       res.json(result);
     })

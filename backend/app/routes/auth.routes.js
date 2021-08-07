@@ -24,9 +24,9 @@ module.exports = function (app) {
 
 
   app.post("/api/auth/signin", controller.signin); // sign in user
-  app.put("/api/user/update", controller.update);
+  app.put("/api/post/update", controller.update);
   app.get(
-    "/api/user/mypost/",
+    "/api/post/mypost/",
  
     controller.getPosts // signs up user successfully
   );

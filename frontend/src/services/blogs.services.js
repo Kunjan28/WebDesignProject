@@ -6,17 +6,54 @@ class BlogServices {
 
     getAllPosts(){
         return axios
-        //need to fill
+        .get(apiurl 
+        )
+        .then(response => { 
+          return response.data;
+        });
     }
 
     getPostWithTag(tagname){
         return axios
-        //need to fill
+        .put(apiurl + "tags", {
+            tags
+        })
+        .then(response => { 
+          return response.data;
+        });
     }
 
-    getPostByUser(emailid){
+    getPostByUser(userName){
         return axios
-        //need to fill
+        .get(apiurl +"mypost",{
+            userName
+        }
+        )
+        .then(response => { 
+          return response.data;
+        });
+    }
+
+    addPost(tag,title,content,postDate,userName){
+        return axios
+        .put(apiurl + "update", {
+            tag,
+            title,content,postDate,userName
+        })
+        .then(response => { 
+          return response.data;
+        });
+    }
+
+    addPostComment(){
+        return axios
+        .put(apiurl + "comment", {
+            id,
+            userName,comment
+        })
+        .then(response => { 
+          return response.data;
+        });
     }
 
 }

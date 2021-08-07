@@ -25,6 +25,18 @@ module.exports =  (app)=> {
     controller.getTagPost // signs up user successfully
   );
 
+  app.get(
+    "/api/posts/",
+ 
+    controller.getAllPost // signs up user successfully
+  );
+
+
+  app.put(
+    "/api/post/comment",
+ 
+    controller.postComment
+  );
   
 
   

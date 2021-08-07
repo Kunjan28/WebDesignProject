@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 //const multer = require("multer");
 const MIME_TYPE_MAP = {
     "image/png": "png",
@@ -67,9 +68,6 @@ exports.post = (req, res) => {
 }
 
 exports.getTagPost = (req, res) => {
-    
-
-
 
         console.log(req.body.tags);
 
@@ -86,4 +84,57 @@ exports.getTagPost = (req, res) => {
        
     })
 }
+
+exports.getAllPost = (req, res) => {
+   
+
+Post.find().then(documents => {
+    if(documents){
+         res.status(200).json({
+            message: "All Posts fetched successfully!",
+            posts: documents
+        });
+    }
+    else{
+         res.status(404).json({ message: "Post not found!" });
+    }
+   
+})
+}
+
+exports.postComment = (req, res) => {
+    const comment = new Comment();
+    comment.id=req.body.id,
+    comment.userName= req.body.userName;
+    comment.comment=req.body.comment;
+
+    comment.save()
+    .then((result) => {
+      Post.findOne({ _id: req.body.id }, (err, post) => {
+          if (post) {
+              // The below two lines will add the newly saved review's 
+              // ObjectID to the the User's reviews array field
+              post.comments.push(comment);
+              post.save();
+              //res.json({ message: 'Comment created!' });
+          }
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({ error });
+    });
+
+    Post.findOne({ _id: req.body.id })
+    .populate("comments")
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
+
+   
+}
+
 
