@@ -1,0 +1,44 @@
+.text-muted{
+    text-align: center;
+}
+
+.card-title{
+    text-align: center;
+}
+
+.card h2{
+    text-align: center;
+}
+
+.card h7{
+    text-align: center;
+     font-weight: bolder;
+}
+
+p.card-text{
+    text-align: center;
+    font-weight: bolder;
+}
+
+div.card{
+    width:1000px;
+    height:330px;
+    margin: 0.5rem;
+    border: 5px solid grey;
+    
+  
+}
+
+img{
+    margin-left:100px;
+    margin-top: 1px;
+    width:800px;
+    height:250px;
+    border: 5px solid brown;
+}
+
+.card-rating{
+    margin-left: 200px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   font-weight:bolder ;
+}
