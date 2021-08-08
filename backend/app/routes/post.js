@@ -20,13 +20,13 @@ module.exports =  (app)=> {
   );
 
   app.get(
-    "/api/posts/tags",
+    "/api/post/tags",
  
     controller.getTagPost // signs up user successfully
   );
 
   app.get(
-    "/api/posts/",
+    "/api/post/",
  
     controller.getAllPost // signs up user successfully
   );

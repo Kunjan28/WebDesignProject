@@ -24,7 +24,7 @@ class  BlogByUser extends Component{
                 }
                 this.setState({blogs: fullblogs, showBlogs: fullblogs})
                 this.setState((currentState) => ({
-                    showBlogs: currentState.blogs.filter((c) => c.userName === "RGALA")
+                    showBlogs: currentState.blogs.filter((c) => c.userName === this.props.userName )
                 }))
 
                 console.log('mounted')
@@ -93,7 +93,7 @@ class  BlogByUser extends Component{
                                             </Form.Group>
                                             <Button
                                             onClick = {(e)=>{
-                                                // console.log(post.currentComment)
+                                               // console.log(post.currentComment)
                                                 BlogServices.addPostComment(post._id, this.props.userName,post.currentComment).then( () =>{
                                                     window.location.reload();
                                                 },error =>{

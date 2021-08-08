@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { Card, ListGroup, Button, Form } from 'react-bootstrap'
+import BlogServices from '../services/blogs.services';
 
 class  BlogWithTag extends Component{
 
@@ -85,10 +86,15 @@ class  BlogWithTag extends Component{
                                             </Form.Group>
                                             <Button
                                             onClick = {(e)=>{
+                                                BlogServices.addPostComment(post._id, this.props.userName,post.currentComment).then( () =>{
+                                                    window.location.reload();
+                                                },error =>{
+                                                    console.log('error commenr')
+                                                })
                                                 this.setState((currentState) => ({
                                                     blogs: currentState.blogs.map((c) =>{
                                                         if(c.title === post.title) {
-                                                            c.comments = [{userName:'shjs', comment:c.currentComment}].concat(c.comments)
+                                                            c.comments = [{userName:c.userName, comment:c.currentComment}].concat(c.comments)
                                                             console.log(c.comments)
                                                             c.currentComment=''
                                                         }

@@ -12,7 +12,9 @@ class AuthService {
       })
       .then(response => { // saves jwt to local storage
         if (response.data.accessToken) {
+          console.log(response.data.accessToken);
           localStorage.setItem("user", JSON.stringify(response.data));
+          localStorage.setItem("token", JSON.stringify(response.data.token));
         }
         return response.data;
       });
@@ -37,6 +39,8 @@ class AuthService {
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));;
   }
+
+  
 }
 
 export default new AuthService();

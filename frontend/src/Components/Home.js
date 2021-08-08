@@ -64,7 +64,7 @@ class Home extends Component{
                         {
                             this.state.blogs.length === 0
                             ? <div>Loading ...</div>
-                            : <BlogWithTag tag={this.state.selectedTag} blogs={this.state.showBlogs}/>
+                            : <BlogWithTag tag={this.state.selectedTag} blogs={this.state.showBlogs} userName={this.state.currentUser}/>
                         }
                         
                     </Col>
