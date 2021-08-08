@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Container, Nav, Navbar, Form , NavDropdown, FormControl, Button} from 'react-bootstrap';
 import {Route, HashRouter} from 'react-router-dom';
 import Home from './Components/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,6 +15,7 @@ import TopNav from './Components/TopNav';
 class App extends Component{
 	constructor(props){
         super(props)
+
         this.state = {
             credentials: {
                 "emailid":'',
@@ -28,21 +28,9 @@ class App extends Component{
             loginShow: false,
             signUpShow: false
         }
+
         
     }
-
-	// blog :[{ tag: "tag1", name:"", content:""}]
-
-	gautham
-	sgkadfjdhfadjkfhadkfdagdak
-	football
-
-	// { tag: "footbal",
-	// 	name: "Gautham",
-	// 	content:"sgkadfjdhfadjkfhadkfdagdak"}
-
-	// Gautham (author)
-	// sgkadfjdhfadjkfhadkfdagdak
 
 	componentDidMount(){
         this.userAuth()

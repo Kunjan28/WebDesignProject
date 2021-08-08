@@ -69,9 +69,9 @@ exports.post = (req, res) => {
 
 exports.getTagPost = (req, res) => {
 
-        console.log(req.body.tags);
+        console.log(req.body);
 
-    Post.find({"tag":req.body.tags}).then(documents => {
+    Post.find({"tag":req.body.tagname}).then(documents => {
         if(documents){
              res.status(200).json({
                 message: "Posts fetched successfully!",
@@ -88,7 +88,7 @@ exports.getTagPost = (req, res) => {
 exports.getAllPost = (req, res) => {
    
 
-Post.find().then(documents => {
+Post.find().populate("comments").then(documents => {
     if(documents){
          res.status(200).json({
             message: "All Posts fetched successfully!",
@@ -98,7 +98,6 @@ Post.find().then(documents => {
     else{
          res.status(404).json({ message: "Post not found!" });
     }
-   
 })
 }
 

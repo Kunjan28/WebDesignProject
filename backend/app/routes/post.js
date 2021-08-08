@@ -14,13 +14,13 @@ module.exports =  (app)=> {
   });
   //posts.use(checkAuth);
   app.post(
-    "/api/posts",
+    "/api/posts/",
  
     controller.post // signs up user successfully
   );
 
   app.get(
-    "/api/posts/tags/",
+    "/api/posts/tags",
  
     controller.getTagPost // signs up user successfully
   );
@@ -38,10 +38,5 @@ module.exports =  (app)=> {
     controller.postComment
   );
   
-
-  
-
-
-
   //post.post("/api/auth/signin", controller.signin); // sign in user
 };

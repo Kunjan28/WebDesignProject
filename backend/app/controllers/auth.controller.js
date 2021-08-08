@@ -106,7 +106,8 @@ exports.signin = (req, res) => {
         id: user._id,
         firstName: user.firstName,
         emailId: user.emailId,
-        accessToken: token
+        accessToken: token,
+        userName: user.userName
       });
     });
 };

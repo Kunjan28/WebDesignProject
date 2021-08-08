@@ -1,41 +1,49 @@
 import React, {Component} from 'react'
 import { Card, ListGroup, Button, Form } from 'react-bootstrap'
+import BlogServices from '../services/blogs.services';
 
-class  BlogWithTag extends Component{
+class  BlogByUser extends Component{
 
     constructor(props){
         super(props)
-        // console.log(this.props.blogs)
-        var addBlogs = this.props.blogs
-        for(var blog of addBlogs){
-            blog.commentVisibility='none'
-            blog.buttonText = 'See Comments'
-            blog.currentComment=''
-        }
         this.state = {
-            blogs: addBlogs,
-            tag: this.props.tag
+            blogs:[],
+            showBlogs:[],
         }
     }
 
-    componentDidUpdate(prevProps){
-        if(prevProps.tag != this.props.tag){
-            console.log(this.props.blogs)
-            this.setState({blogs:this.props.blogs, tag: this.props.tag})
-        }
+    componentDidMount(){
+        BlogServices.getAllPosts().then(
+            (response) => {
+                console.log(response.posts)
+                var fullblogs = response.posts
+                for(const blog of fullblogs){
+                    blog.commentVisibility='none'
+                    blog.buttonText = 'See Comments'
+                    blog.currentComment=''
+                }
+                this.setState({blogs: fullblogs, showBlogs: fullblogs})
+                this.setState((currentState) => ({
+                    showBlogs: currentState.blogs.filter((c) => c.userName === "RGALA")
+                }))
+
+                console.log('mounted')
+                console.log(this.state)
+            }
+        )
     }
 
     render(){
-        console.log(this.state)
+
         return(
-            <div key={this.props.tag}>
+            <div>
                 <h1>
-                    {this.props.tag}
+                    {
+                        this.props.userName
+                    }
                 </h1>
-                {console.log(this.state.blogs)}
                 {
-                    this.state.blogs.map((post)=>{
-                        console.log(post)
+                    this.state.showBlogs.map((post)=>{
                         return(
                             <Card key = {post._id} style={{ width: '100%' }}>
                               <Card.Body>
@@ -75,7 +83,7 @@ class  BlogWithTag extends Component{
                                                 onChange={(e)=>{
                                                     this.setState( (currentState) => ({
                                                         blogs: currentState.blogs.map((c) =>{
-                                                            if(c.title === post.title) {
+                                                            if(c._id === post._id) {
                                                                 c.currentComment=e.target.value
                                                             }
                                                             return c
@@ -85,9 +93,15 @@ class  BlogWithTag extends Component{
                                             </Form.Group>
                                             <Button
                                             onClick = {(e)=>{
+                                                // console.log(post.currentComment)
+                                                BlogServices.addPostComment(post._id, this.props.userName,post.currentComment).then( () =>{
+                                                    window.location.reload();
+                                                },error =>{
+                                                    console.log('error commenr')
+                                                })
                                                 this.setState((currentState) => ({
                                                     blogs: currentState.blogs.map((c) =>{
-                                                        if(c.title === post.title) {
+                                                        if(c._id === post._id) {
                                                             c.comments = [{userName:'shjs', comment:c.currentComment}].concat(c.comments)
                                                             console.log(c.comments)
                                                             c.currentComment=''
@@ -127,4 +141,4 @@ class  BlogWithTag extends Component{
     }
 }
 
-export default BlogWithTag
+export default BlogByUser

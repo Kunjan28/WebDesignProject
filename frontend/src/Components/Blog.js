@@ -3,7 +3,8 @@ import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
 import { Container, Row, Image, Carousel, Col, Form,Button, Dropdown } from "react-bootstrap";
 import { HashRouter, Route } from "react-router-dom";
-import BlogWithTag from "./BlogWithTag";
+import BlogByUser from "./BlogByUser";
+import BlogServices from '../services/blogs.services';
 
 class Blog extends Component{
     
@@ -11,12 +12,14 @@ class Blog extends Component{
         super(props)
         this.state = {
             rowLength:3,
-            heading:'Title of the post',
-            content:'Write something here',
+            heading:'',
+            content:'',
             postTag:'Select Tag',
-            color:'grey',
-            tagsList:['Sports','Food','Travel','Tech','Funny','Miscellaneous'],
-            selectedTag:'none'
+            tagsList:['Sports','Food','Travel','Movies','Tech','Funny','Miscellaneous'],
+            selectedTag:'none',
+            userName: localStorage.getItem("user") !== null && localStorage.getItem("user") !== undefined
+            ? JSON.parse(localStorage.getItem("user")).userName
+            : ''
         }
     }
 
@@ -24,10 +27,28 @@ class Blog extends Component{
 
         const formSubmit = (e) =>{
             e.preventDefault()
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            today = mm + '/' + dd + '/' + yyyy;
+            BlogServices.addPost(
+                this.state.postTag,
+                this.state.heading,
+                this.state.content,
+                today,
+                this.state.userName
+                ).then( ()=>{
+                    window.location.reload();
+                },
+                error =>{
+                    console.log('error.respons')
+                })
             const blog={ //add user id
+                tag:this.state.postTag,
                 head:this.state.heading,
                 content:this.state.content,
-                tag:this.state.postTag
+                
             }
             this.props.writeBlog(blog)
             this.setState({rowLength:3,heading:'Title of the post',content:'Write something here',postTag:'Select Tag',color:'grey'})
@@ -47,10 +68,10 @@ class Blog extends Component{
                     <Form onSubmit={formSubmit}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Write something</Form.Label>
-                            <Form.Control 
+                            <Form.Control
                             as="textarea" rows={1} 
-                            style={{color:this.state.color}}
-                            onClick={(e)=>{this.setState({heading:'', color:'black'})}}
+                            onClick={(e)=>{this.setState({heading:''})}}
+                            placeholder='Title of the blog'
                             value={this.state.heading}
                             onChange={(e)=> {this.setState({heading:e.target.value})}}
                             />
@@ -58,9 +79,9 @@ class Blog extends Component{
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea2">
                             <Form.Control as="textarea" 
                             rows={this.state.rowLength}
+                            placeholder='Content goes here'
                             value={this.state.content}
-                            style={{color:this.state.color}}
-                            onClick={(e)=>{this.setState({rowLength:10, color:'black', content:''})}} 
+                            onClick={(e)=>{this.setState({rowLength:10, content:''})}} 
                             onChange={(e)=> {this.setState({content:e.target.value})}}/>
                         </Form.Group>
                         <Dropdown className="d-flex justify-content-end">
@@ -94,7 +115,7 @@ class Blog extends Component{
                         </Navbar>
                     </Col>
                     <Col md={7}>
-                        <BlogWithTag tag={this.state.selectedTag}/>
+                        <BlogByUser userName={this.state.userName}/>
                     </Col>
                     <Col>
                         <div>
