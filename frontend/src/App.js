@@ -32,10 +32,6 @@ class App extends Component{
         
     }
 
-	componentDidMount(){
-        this.userAuth()
-    }
-
 	writeBlog = (details) => {
 		var api = "" //api to post the blog
 		//blog should have tags, post, email

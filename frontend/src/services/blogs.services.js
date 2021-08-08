@@ -1,4 +1,5 @@
 import axios from "axios";
+import authHeader from './auth-header';
 
 const apiurl = "http://localhost:8001/api/post/";
 
@@ -17,8 +18,9 @@ class BlogServices {
       console.log(tags)
         return axios
         .get(apiurl + "tags", {
-            tags
-        })
+          params:{ tags:tags},  
+          headers: authHeader() }
+          )
         .then(response => { 
           return response.data;
         });
@@ -26,9 +28,9 @@ class BlogServices {
 
     getPostByUser(userName){
         return axios
-        .get(apiurl +"mypost",{
-            userName
-        }
+        .get(apiurl +"mypost",
+        {params:{ userName:userName},  
+        headers: authHeader() }
         )
         .then(response => { 
           return response.data;
@@ -41,8 +43,8 @@ class BlogServices {
         return axios
         .put(apiurl+"update", {
             tag,
-            title,content,postDate,userName
-        })
+            title,content,postDate,userName,
+        },{ headers: authHeader() })
         .then(response => { 
           return response.data;
         });

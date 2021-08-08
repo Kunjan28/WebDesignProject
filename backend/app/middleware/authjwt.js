@@ -7,7 +7,8 @@ const Role = db.role;
 
 // sets token
 verifyToken = (req, res, next) => {
-  let token = req.headers["x-access-token"];
+  console.log("ssdf"+req.headers.authorization);
+  let token = req.headers.authorization.split(" ")[1];
 
   // if no token has been created
   if (!token) {

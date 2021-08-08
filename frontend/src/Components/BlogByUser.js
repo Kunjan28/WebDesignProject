@@ -13,7 +13,7 @@ class  BlogByUser extends Component{
     }
 
     componentDidMount(){
-        BlogServices.getAllPosts().then(
+        BlogServices.getPostByUser(this.props.userName).then(
             (response) => {
                 console.log(response.posts)
                 var fullblogs = response.posts

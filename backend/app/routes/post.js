@@ -1,4 +1,5 @@
 const checkAuth = require("../middleware/checkAuth");
+const { authjwt } = require("../middleware");
 const controller = require("../controllers/post.controller");
 
 // sets up routes for authentication
@@ -12,31 +13,28 @@ module.exports =  (app)=> {
     );
     next();
   });
-  //posts.use(checkAuth);
-  app.post(
-    "/api/posts/",
- 
-    controller.post // signs up user successfully
-  );
 
   app.get(
     "/api/post/tags",
- 
-    controller.getTagPost // signs up user successfully
+    [authjwt.verifyToken],
+    controller.getTagPost // get posts by tags
   );
 
   app.get(
     "/api/post/",
- 
-    controller.getAllPost // signs up user successfully
+    controller.getAllPost // get all posts
   );
 
 
   app.put(
     "/api/post/comment",
- 
     controller.postComment
+  );//post a comment on blog
+  app.put("/api/post/update",[authjwt.verifyToken], controller.update); //post a blog
+  app.get(
+    "/api/post/mypost/",[authjwt.verifyToken],
+ 
+    controller.getPosts // get post by username
   );
   
-  //post.post("/api/auth/signin", controller.signin); // sign in user
 };

@@ -1,77 +1,11 @@
 const Post = require('../models/post');
+const User = require('../models/user.model');
 const Comment = require('../models/comment');
-//const multer = require("multer");
-const MIME_TYPE_MAP = {
-    "image/png": "png",
-    "image/jpeg": "jpg",
-    "image/jpg": "jpg",
-    "image/gif": "gif"
-};
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         console.log(req,file)
-//         const isValid = MIME_TYPE_MAP[file.mimetype];
 
-//         let error = new Error("Invalid mime type");
-//         if (isValid) {
-//             error = null;
-//         }
-//         cb(error, "images");
-//     },
-//     filename: (req, file, cb) => {
-//         const name = file.originalname
-//             .toLowerCase()
-//             .split(" ")
-//             .join("-");
-
-//         console.log(name)
-//         const ext = MIME_TYPE_MAP[file.mimetype];
-//         cb(null, name + "-" + Date.now() + "." + ext);
-//     }
-// });
-exports.post = (req, res) => {
-    const post = new Post({
-        tag: req.body.tag,
-        title:req.body.title,
-        content: req.body.content,
-        //imagePath: url + "/images/" + req.file.filename,
-        creator: req.body.userId,
-        postDate: req.body.postDate,
-    })
-    console.log(post);
-   
-        post.save().
-            then(post => {
-                if(post){
-                    res.status(201).json({
-                        message: "Post added successfully",
-                        post: {
-                            ...post,
-                            id: post._id
-                        }
-                    })
-                }
-
-                    if(!post){
-                        res.status(404).json({
-                            message: "Error Adding Post",
-                          
-                        })
-                    }
-               
-                
-            })
-            .catch(e => {
-                console.log(e)
-                res.status(501).json({ message: "Error Adding Post"+e });
-            })
-}
-
+//get post by tags
 exports.getTagPost = (req, res) => {
 
-        console.log(req.body);
-
-    Post.find({"tag":req.body.tagname}).then(documents => {
+    Post.find({"tag":req.query.tagname}).then(documents => {
         if(documents){
              res.status(200).json({
                 message: "Posts fetched successfully!",
@@ -85,9 +19,8 @@ exports.getTagPost = (req, res) => {
     })
 }
 
+//get all posts
 exports.getAllPost = (req, res) => {
-   
-
 Post.find().populate("comments").then(documents => {
     if(documents){
          res.status(200).json({
@@ -100,7 +33,7 @@ Post.find().populate("comments").then(documents => {
     }
 })
 }
-
+//post comment on blog
 exports.postComment = (req, res) => {
     const comment = new Comment();
     comment.id=req.body.id,
@@ -135,5 +68,44 @@ exports.postComment = (req, res) => {
 
    
 }
-
-
+//add blog
+exports.update = (req, res) => {
+    const post = new Post();
+    post.tag= req.body.tag;
+    post.title=req.body.title;
+    post.content= req.body.content;
+    //imagePath: url + "/images/" + req.file.filename,
+    post.userName= req.body.userName;
+    post.postDate=req.body.postDate;
+    post.save()
+      .then((result) => {
+        User.findOne({ userName: post.userName }, (err, user) => {
+            if (user) {
+                // The below two lines will add the newly saved review's 
+                // ObjectID to the the User's reviews array field
+                user.posts.push(post);
+                user.save();
+                res.json({ message: 'Review created!' });
+            }
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).json({ error });
+      });
+    
+  }
+//get posts by UserName
+  exports.getPosts = (req, res) => {
+    User.findOne({ userName: req.query.userName })
+      .populate({path:"posts", populate : {
+        path : 'comments'}
+      })
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((error) => {
+        res.status(500).json({ error });
+      });
+  };
+  
