@@ -120,6 +120,7 @@ class Map extends React.Component {
 					}
 				/>
 				<div>
+					
 					{this.state.placeData.map(place => <PlaceCard placeDetails={place}></PlaceCard>)}
 				</div>
 			</div>

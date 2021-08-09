@@ -1,6 +1,10 @@
 import React from "react";
 import "./PlaceCard.css";
+import defaultImage from './travelPlace.jfif';
 import { Button } from 'react-bootstrap';
+import Row from 'react-bootstrap/Row'
+import Container from 'react-bootstrap/Container'
+
 
 const PlaceCard = ({ placeDetails }) => {
 
@@ -22,7 +26,7 @@ const PlaceCard = ({ placeDetails }) => {
 
     const getImage2 = (photos) => {
         if (photos === undefined) 
-            return "Jaya"
+            return defaultImage;
     
         return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=960&photoreference=${photos[0].photo_reference}&key=AIzaSyBJd54lkWdNgrJVYKp4Oqr2YUSkfScT5Rg`;
     }
@@ -37,22 +41,27 @@ const PlaceCard = ({ placeDetails }) => {
             ? <div><h4>Please select the day first on first page</h4></div>
             :
             (
+                <Container>
+                      <Row>
+                     
                 <div className="card">
 
-                    <div className="card-title-group">
-                        <h5 className="card-title">{placeDetails.name}</h5>
-                       
-                    <img src={getImage2(placeDetails.photos)} />
-                    <div className="card-rating">
-                        Ratings:{placeDetails.rating} &nbsp;&nbsp;
-                    User Ratings:{placeDetails.user_ratings_total}&nbsp;&nbsp;
-                    Vicinity:{placeDetails.vicinity}</div>
-                    
-                    </div>
-
+                <div className="card-title-group">
+                    <h5 className="card-title">{placeDetails.name}</h5>
                    
-                   
+                <img src={getImage2(placeDetails.photos)} />
+                <div className="card-rating">
+                    Ratings:{placeDetails.rating} &nbsp;&nbsp;
+                User Ratings:{placeDetails.user_ratings_total}&nbsp;&nbsp;
+                Vicinity:{placeDetails.vicinity}</div>
+                
+               
                 </div>
+                </div>
+               
+                </Row>
+            </Container>             
+    
              
             )
     );
