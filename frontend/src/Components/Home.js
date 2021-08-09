@@ -3,6 +3,7 @@ import { Nav, Navbar } from "react-bootstrap";
 import { Col, Container, Row } from "react-bootstrap";
 import BlogWithTag from "./BlogWithTag";
 import BlogServices from '../services/blogs.services';
+import Loading from "./Loading";
 
 
 class Home extends Component{
@@ -33,6 +34,7 @@ class Home extends Component{
     }
     render(){
         console.log("render called")
+        console.log(localStorage.getItem("user"))
         console.log(this.state)
         return(
             <Container>
@@ -63,7 +65,7 @@ class Home extends Component{
                     {console.log(this.state.currentUser)}
                         {
                             this.state.blogs.length === 0
-                            ? <div>Loading ...</div>
+                            ?  <Loading />
                             : <BlogWithTag tag={this.state.selectedTag} blogs={this.state.showBlogs} userName={this.state.currentUser}/>
                         }
                         

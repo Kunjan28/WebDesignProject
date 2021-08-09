@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { Card, ListGroup, Button, Form } from 'react-bootstrap'
 import BlogServices from '../services/blogs.services';
+import Loading from './Loading';
 
 class  BlogByUser extends Component{
 
@@ -38,22 +39,23 @@ class  BlogByUser extends Component{
         return(
             <div>
                 <h1>
-                    {
-                        this.props.userName
-                    }
+                    My posts
                 </h1>
                 {
-                    this.state.showBlogs.map((post)=>{
+                    this.state.showBlogs.length === 0
+                    ? <Loading />
+                    : this.state.showBlogs.map((post)=>{
                         return(
                             <Card key = {post._id} style={{ width: '100%' }}>
                               <Card.Body>
-                                <Card.Title>{post.title}</Card.Title>
+                                <Card.Title className="text-center">{post.title}</Card.Title>
                                 <Card.Img variant="top" src={post.imagePath} />
                                 <Card.Subtitle className="mb-2 text-muted">{post.tag}</Card.Subtitle>
                                 <Card.Text>
                                   {post.content}
                                 </Card.Text>
-                                <Button onClick={
+                                <Button className='btn-sm'
+                                onClick={
                                     (e) => {
                                         this.setState( (currentState) => ({
                                             blogs: currentState.blogs.map( (c) =>{
@@ -74,45 +76,7 @@ class  BlogByUser extends Component{
                                 }>{post.buttonText}</Button>
                                 
                                 <ListGroup variant="flush" style={{display:post.commentVisibility}}>
-                                        <Form>
-                                            <Form.Group className="mb-3" controlId="formFirstName">
-                                                <Form.Control 
-                                                type="text" 
-                                                placeholder="Write a comment"
-                                                value={post.currentComment}
-                                                onChange={(e)=>{
-                                                    this.setState( (currentState) => ({
-                                                        blogs: currentState.blogs.map((c) =>{
-                                                            if(c._id === post._id) {
-                                                                c.currentComment=e.target.value
-                                                            }
-                                                            return c
-                                                        })
-                                                    }))
-                                                }} />
-                                            </Form.Group>
-                                            <Button
-                                            onClick = {(e)=>{
-                                               // console.log(post.currentComment)
-                                                BlogServices.addPostComment(post._id, this.props.userName,post.currentComment).then( () =>{
-                                                    window.location.reload();
-                                                },error =>{
-                                                    console.log('error commenr')
-                                                })
-                                                this.setState((currentState) => ({
-                                                    blogs: currentState.blogs.map((c) =>{
-                                                        if(c._id === post._id) {
-                                                            c.comments = [{userName:'shjs', comment:c.currentComment}].concat(c.comments)
-                                                            console.log(c.comments)
-                                                            c.currentComment=''
-                                                        }
-                                                        return c
-                                                    })
-                                                }))
-                                            }}
-                                            > Reply</Button>
-                                        </Form>
-                                    {
+                                {
                                         post.comments.length === 0
                                         ? <div>No comments</div>
                                         : post.comments.map((comment) => {
@@ -130,6 +94,46 @@ class  BlogByUser extends Component{
                                             </ListGroup.Item>
                                         })
                                     }
+                                        <Form className='form-tag'>
+                                            <Form.Group className="mb-3" controlId="formFirstName">
+                                                <Form.Control 
+                                                type="text" 
+                                                placeholder="Write a comment"
+                                                value={post.currentComment}
+                                                onChange={(e)=>{
+                                                    this.setState( (currentState) => ({
+                                                        blogs: currentState.blogs.map((c) =>{
+                                                            if(c._id === post._id) {
+                                                                c.currentComment=e.target.value
+                                                            }
+                                                            return c
+                                                        })
+                                                    }))
+                                                }} />
+                                            </Form.Group>
+                                            <Button
+                                            className='btn-sm'
+                                            onClick = {(e)=>{
+                                               // console.log(post.currentComment)
+                                                BlogServices.addPostComment(post._id, this.props.userName,post.currentComment).then( () =>{
+                                                    // window.location.reload();
+                                                },error =>{
+                                                    console.log('error commenr')
+                                                })
+                                                this.setState((currentState) => ({
+                                                    blogs: currentState.blogs.map((c) =>{
+                                                        if(c._id === post._id) {
+                                                            c.comments = c.comments.concat([{userName:c.userName, comment:c.currentComment}])
+                                                            console.log(c.comments)
+                                                            c.currentComment=''
+                                                        }
+                                                        return c
+                                                    })
+                                                }))
+                                            }}
+                                            > Reply</Button>
+                                        </Form>
+                                    
                                 </ListGroup>
                               </Card.Body>
                             </Card>

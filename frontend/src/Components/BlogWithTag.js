@@ -36,17 +36,19 @@ class  BlogWithTag extends Component{
                 {console.log(this.state.blogs)}
                 {
                     this.state.blogs.map((post)=>{
-                        console.log(post)
+                        // console.log(post)
                         return(
                             <Card key = {post._id} style={{ width: '100%' }}>
                               <Card.Body>
-                                <Card.Title>{post.title}</Card.Title>
-                                <Card.Img variant="top" src={post.imagePath} />
-                                <Card.Subtitle className="mb-2 text-muted">{post.tag}</Card.Subtitle>
+                                <Card.Title className="text-center">{post.title}<Card.Subtitle className="mb-2 text-muted text-end">{post.tag}</Card.Subtitle></Card.Title>
+                                <Card.Text>{`Author: ${post.userName}`}</Card.Text>
                                 <Card.Text>
-                                  {post.content}
+                                  {`${post.content}`}
                                 </Card.Text>
-                                <Button onClick={
+                                <Button 
+                                className='btn-sm'
+                                
+                                onClick={
                                     (e) => {
                                         this.setState( (currentState) => ({
                                             blogs: currentState.blogs.map( (c) =>{
@@ -67,44 +69,7 @@ class  BlogWithTag extends Component{
                                 }>{post.buttonText}</Button>
                                 
                                 <ListGroup variant="flush" style={{display:post.commentVisibility}}>
-                                        <Form>
-                                            <Form.Group className="mb-3" controlId="formFirstName">
-                                                <Form.Control 
-                                                type="text" 
-                                                placeholder="Write a comment"
-                                                value={post.currentComment}
-                                                onChange={(e)=>{
-                                                    this.setState( (currentState) => ({
-                                                        blogs: currentState.blogs.map((c) =>{
-                                                            if(c.title === post.title) {
-                                                                c.currentComment=e.target.value
-                                                            }
-                                                            return c
-                                                        })
-                                                    }))
-                                                }} />
-                                            </Form.Group>
-                                            <Button
-                                            onClick = {(e)=>{
-                                                BlogServices.addPostComment(post._id, this.props.userName,post.currentComment).then( () =>{
-                                                    window.location.reload();
-                                                },error =>{
-                                                    console.log('error commenr')
-                                                })
-                                                this.setState((currentState) => ({
-                                                    blogs: currentState.blogs.map((c) =>{
-                                                        if(c.title === post.title) {
-                                                            c.comments = [{userName:c.userName, comment:c.currentComment}].concat(c.comments)
-                                                            console.log(c.comments)
-                                                            c.currentComment=''
-                                                        }
-                                                        return c
-                                                    })
-                                                }))
-                                            }}
-                                            > Reply</Button>
-                                        </Form>
-                                    {
+                                {
                                         post.comments.length === 0
                                         ? <div>No comments</div>
                                         : post.comments.map((comment) => {
@@ -122,6 +87,45 @@ class  BlogWithTag extends Component{
                                             </ListGroup.Item>
                                         })
                                     }
+                                        <Form className='form-tag'>
+                                            <Form.Group className="mb-3" controlId="formFirstName">
+                                                <Form.Control 
+                                                type="text" 
+                                                placeholder="Write a comment"
+                                                value={post.currentComment}
+                                                onChange={(e)=>{
+                                                    this.setState( (currentState) => ({
+                                                        blogs: currentState.blogs.map((c) =>{
+                                                            if(c.title === post.title) {
+                                                                c.currentComment=e.target.value
+                                                            }
+                                                            return c
+                                                        })
+                                                    }))
+                                                }} />
+                                            </Form.Group>
+                                            <Button
+                                            className='btn-sm'
+                                            onClick = {(e)=>{
+                                                BlogServices.addPostComment(post._id, this.props.userName,post.currentComment).then( () =>{
+                                                    // window.location.reload();
+                                                },error =>{
+                                                    console.log('error commenr')
+                                                })
+                                                this.setState((currentState) => ({
+                                                    blogs: currentState.blogs.map((c) =>{
+                                                        if(c.title === post.title) {
+                                                            c.comments = c.comments.concat([{userName:c.userName, comment:c.currentComment}])
+                                                            console.log(c.comments)
+                                                            c.currentComment=''
+                                                        }
+                                                        return c
+                                                    })
+                                                }))
+                                            }}
+                                            > Reply</Button>
+                                        </Form>
+                                    
                                 </ListGroup>
                               </Card.Body>
                             </Card>
