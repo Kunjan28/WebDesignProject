@@ -15,7 +15,7 @@ class Cuisine extends Component{
     }
 
     getRestaurantData = async (e) => {
-        const api_call = await fetch(`https://api.documenu.com/v2/restaurants/zip_code/${this.props.zipcode}?cuisine=${this.props.cuisine}&key=${DOCUMENU_API_KEY}`);
+        const api_call = await fetch(`https://api.documenu.com/v2/restaurants/search/geo?lat=${this.props.lat}&lon=${this.props.lon}&distance=10&cuisine=${this.props.cuisine}&key=${DOCUMENU_API_KEY}`);
         const result = await api_call.json();
         this.setState({ restaurants: result.data });
         console.log(this.state.restaurants);

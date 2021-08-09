@@ -7,12 +7,30 @@ class Food extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectValue: ""
+      selectValue: "",
+      latitude: null,
+      longitude: null
     };
+    this.success = this.success.bind(this);
+    this.error = this.error.bind(this);
   }
 
   handleDropdownChange = (e) => {
     this.setState({ selectValue: e });
+  }
+
+  success(pos) {
+    this.setState({latitude: pos.coords.latitude});
+    this.setState({longitude: pos.coords.longitude});
+  }
+
+  error(err) {
+    this.setState({latitude: "42.360081"});
+    this.setState({longitude: "-71.058884"});
+  }
+
+  componentDidMount() {
+    window.navigator.geolocation.getCurrentPosition(this.success, this.error);
   }
 
   render() {
@@ -38,7 +56,7 @@ class Food extends Component {
         </Row>
 
         <br></br>
-        <Cuisine cuisine={this.state.selectValue} zipcode="02125"/>
+        <Cuisine cuisine={this.state.selectValue} lat={this.state.latitude} lon={this.state.longitude}/>
       </Container>
 
     )
