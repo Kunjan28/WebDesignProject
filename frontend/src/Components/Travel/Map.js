@@ -1,6 +1,8 @@
 import React from 'react';
 import PlaceCard from './PlaceCard';
+import { Button, InputGroup, FormControl, Container } from "react-bootstrap";
 import { GoogleMap, InfoWindow, Marker, withGoogleMap, withScriptjs } from "react-google-maps"
+import SearchBox from 'react-google-maps/lib/components/places/SearchBox';
 
 
 
@@ -20,7 +22,8 @@ class Map extends React.Component {
 				lat: 37.317250,
 				lng: -121.909490
 			},
-			placeData: []
+			placeData: [],
+			search: "", clippedSearch: ""
 		}
 	}
 
@@ -56,24 +59,69 @@ class Map extends React.Component {
 		fetch(placeURL)
 			.then(res => res.json())
 			.then(data => data.results.filter(result => result.types.includes("point_of_interest")))
-			.then(data => this.setState({ 
-								placeData: data,
-						 		mapPosition: {
-									lat: latValue,
-									lng: lngValue
-								},
-								markerPosition: {
-									lat: latValue,
-									lng: lngValue
-								}
-							}) 
+			.then(data => this.setState({
+				placeData: data,
+				mapPosition: {
+					lat: latValue,
+					lng: lngValue
+				},
+				markerPosition: {
+					lat: latValue,
+					lng: lngValue
+				}
+			})
 			)
 			.catch(e => console.log('There was an error fetching data'));
 	}
 
 	getPlacesNearBySearchURL = (lat, long) => {
-		return `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=1500&type=point_of_interest=&key=AIzaSyC5FmYAUnhQ6QJcswd2SkFZmWmfRqcjnqc`;
+		return `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=6000&type=point_of_interest=&key=AIzaSyC5FmYAUnhQ6QJcswd2SkFZmWmfRqcjnqc`;
 	}
+
+	onChange = (ev) => {
+		this.setState({ search: ev.target.value })
+		console.log('search' + this.state.search)
+	}
+
+	onSubmit = () => {
+		this.setState({ clippedSearch: this.state.search })
+		console.log('Csearch' + this.state.clippedSearch)
+		this.fetchCoordinatesByPlace(this.state.search);
+	}
+
+	fetchCoordinatesByPlace = (placeName) => {
+		const placeGmapURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${placeName}&key=AIzaSyC5FmYAUnhQ6QJcswd2SkFZmWmfRqcjnqc`;
+		fetch(placeGmapURL)
+			.then(res => res.json())
+			//.then(data => console.log(data.results[0].geometry.location.lat))
+			.then(data => {
+
+				this.setState({
+					// // ...this.state,
+					mapPosition: {
+						lat: Number.parseFloat(data.results[0].geometry.location.lat),
+						lng: Number.parseFloat(data.results[0].geometry.location.lng)
+					},
+					markerPosition: {
+						lat: Number.parseFloat(data.results[0].geometry.location.lat),
+						lng: Number.parseFloat(data.results[0].geometry.location.lng)
+					}
+				})
+
+				return {
+					lat: Number.parseFloat(data.results[0].geometry.location.lat),
+					lng: Number.parseFloat(data.results[0].geometry.location.lng)
+				}
+
+			}
+				// .then(data => console.log(data))
+			)
+			.then(data => this.fetchDataBasedOnCordinates(data.lat, data.lng))
+			.catch(e => console.log('Cannot find place'));
+
+	}
+
+
 
 	render() {
 		const AsyncMap = withScriptjs(
@@ -82,7 +130,9 @@ class Map extends React.Component {
 					<GoogleMap
 						defaultZoom={10}
 						defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
+					
 					>
+						
 						{/* InfoWindow on top of marker */}
 						{/* <InfoWindow
                     onClose={this.onInfoWindowClose}
@@ -93,6 +143,7 @@ class Map extends React.Component {
                     </div>
                   </InfoWindow> */}
 						{/*Marker*/}
+						
 						<Marker
 							name={'Dolores park'}
 							draggable={true}
@@ -100,12 +151,21 @@ class Map extends React.Component {
 							position={{ lat: this.state.markerPosition.lat, lng: this.state.markerPosition.lng }}
 						/>
 						<Marker />
+						
 					</GoogleMap>
 				)
 			)
 		);
 		return (
+
+
 			<div>
+
+
+				<input type="text" style={{ marginLeft: 450, marginTop: 1 }} value={this.state.city} placeholder='Enter city' onInput={this.onChange} />
+				<button onClick={this.onSubmit}>Search</button>
+
+
 				<AsyncMap
 
 					googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyBJd54lkWdNgrJVYKp4Oqr2YUSkfScT5Rg&libraries=places`}
@@ -120,8 +180,17 @@ class Map extends React.Component {
 					}
 				/>
 				<div>
-					
-					{this.state.placeData.map(place => <PlaceCard placeDetails={place}></PlaceCard>)}
+				
+					<Container>
+						{this.state.placeData.map(place =>
+
+							<div style={{ margin: '30px' }}>
+								<PlaceCard placeDetails={place}></PlaceCard>
+							</div>
+
+
+						)}
+					</Container>
 				</div>
 			</div>
 		)
