@@ -22,7 +22,7 @@ class Cuisine extends Component{
     }
 
     getSpoonacularRecipes = async (e) => {
-        const api_call = await fetch(`https://api.spoonacular.com/recipes/complexSearch?cuisine=${this.props.cuisine}&number=5&apiKey=${SPOONACULAR_API_KEY}`);
+        const api_call = await fetch(`https://api.spoonacular.com/recipes/complexSearch?cuisine=${this.props.cuisine}&number=5&addRecipeInformation=true&apiKey=${SPOONACULAR_API_KEY}`);
         const result = await api_call.json();
         this.setState({ recipes: result.results });
     }
@@ -62,7 +62,7 @@ class Cuisine extends Component{
                 <Card.Body>
                 <Card.Title>{ recipe.title }</Card.Title>
                 <Card.Text>
-                    {}
+                    { recipe.summary }
                 </Card.Text>                
                 </Card.Body>
             </Card>
