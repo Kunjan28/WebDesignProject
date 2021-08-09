@@ -40,34 +40,42 @@ class Cuisine extends Component{
         <Row className="rows">
           <Col className="columns" md={8}>
             { this.state.restaurants.map((res) => {
-                return <Card style={{ width: '100%' }}>
-                <Card.Body>
-                  <Card.Title>{ res.restaurant_name }</Card.Title>
-                  <Card.Text>
-                    <p>Address: {res.address.formatted}</p>
-                    <p>Contact: {res.restaurant_phone}</p>
-                  </Card.Text>
-                  <a class="btn btn-primary" href={ res.restaurant_website } role="button" target="_blank">Visit website</a>
-                </Card.Body>
-                <Card.Footer className="text-muted"></Card.Footer>
-              </Card>
+                return <div>
+                    <Card style={{ width: '100%' }}>
+                        <Card.Body>
+                        <Card.Title>{ res.restaurant_name }</Card.Title>
+                        <Card.Text>
+                            <p>Address: {res.address.formatted}</p>
+                            <p>Contact: {res.restaurant_phone}</p>
+                        </Card.Text>
+                        </Card.Body>
+                        <Card.Footer className="text-muted">
+                            <a class="btn btn-primary" href={ res.restaurant_website } role="button" target="_blank">Visit website</a>
+                        </Card.Footer>
+                    </Card>
+                    <br></br>
+                </div>
             })}
             <br></br>
           </Col>
 
           <Col className="columns" lg={4}>
           { this.state.recipes.map((recipe) => {
-            return <Card style={{ width: '100%' }}>
+            return <div><Card style={{ width: '100%' }}>
                 <Card.Img variant="top" src="holder.js/100px180" src={ recipe.image } />
                 <Card.Body>
                 <Card.Title>{ recipe.title }</Card.Title>
                 <Card.Text>
                     { recipe.summary }
-                </Card.Text>                
+                </Card.Text>
                 </Card.Body>
+                <Card.Footer className="text-muted">
+                    <a class="btn btn-primary" href={ recipe.sourceUrl } role="button" target="_blank">Visit website</a>
+                </Card.Footer>
             </Card>
-            })}
             <br></br>
+            </div>
+            })}
           </Col>
         </Row>
         </div>
