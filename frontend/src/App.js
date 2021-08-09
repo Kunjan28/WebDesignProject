@@ -55,7 +55,7 @@ class App extends Component{
 			<HashRouter>
 				<TopNav/>
 				<Route exact path ='/' component={Home}/>
-				<Route path ='/home' component={ (props) => <Auth credentials= {this.state.credentials} isLogged={this.state.isLogged}/>} />
+				<Route path ='/home' component={ Home} />
 				<Route path ='/travel' component={Travel} />
 				<Route path ='/food' component={Food} />
 				<Route path ='/blog' component={ (props) => <Blog credentials= {this.state.credentials} blogs={this.state.blogs} writeBlog = {(details)=>this.writeBlog(details)}/>} />				
