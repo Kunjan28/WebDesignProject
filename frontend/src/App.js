@@ -8,7 +8,6 @@ import Blog from './Components/Blog';
 import LoginModal from './Components/LoginModal';
 import SignUpModal from './Components/SignUpModal';
 import $ from 'jquery';
-import Auth from './Components/Auth';
 import TopNav from './Components/TopNav';
 
 

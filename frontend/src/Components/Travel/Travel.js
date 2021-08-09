@@ -38,8 +38,6 @@ class Travel extends Component {
   
           <div>
             <Map handleFormSubmit={this.handleSubmit} />
-            <input type="text" style={{ marginLeft: 450, marginTop: 1 }} value={this.state.city} placeholder='Enter city' onInput={this.onChange} />
-<button onClick={this.onSubmit}>Search</button>
           </div>
       
     )

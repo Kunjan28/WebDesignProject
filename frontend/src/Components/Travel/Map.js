@@ -130,9 +130,9 @@ class Map extends React.Component {
 					<GoogleMap
 						defaultZoom={10}
 						defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
-					
+
 					>
-						
+
 						{/* InfoWindow on top of marker */}
 						{/* <InfoWindow
                     onClose={this.onInfoWindowClose}
@@ -143,7 +143,7 @@ class Map extends React.Component {
                     </div>
                   </InfoWindow> */}
 						{/*Marker*/}
-						
+
 						<Marker
 							name={'Dolores park'}
 							draggable={true}
@@ -151,7 +151,7 @@ class Map extends React.Component {
 							position={{ lat: this.state.markerPosition.lat, lng: this.state.markerPosition.lng }}
 						/>
 						<Marker />
-						
+
 					</GoogleMap>
 				)
 			)
@@ -159,13 +159,21 @@ class Map extends React.Component {
 		return (
 
 
-			<div>
+			<div> 
 
 
-				<input type="text" style={{ marginLeft: 450, marginTop: 1 }} value={this.state.city} placeholder='Enter city' onInput={this.onChange} />
-				<button onClick={this.onSubmit}>Search</button>
-
-
+				<InputGroup className="mb-3">
+					<FormControl
+						placeholder="Enter place you want to visit and click Search"
+						aria-label="Recipient's username"
+						aria-describedby="basic-addon2"
+						value={this.state.city}
+						onInput={this.onChange}
+					/>
+					<Button variant="outline-primary" active id="button-addon2" onClick={this.onSubmit}>
+						Search
+					</Button>
+				</InputGroup>
 				<AsyncMap
 
 					googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyBJd54lkWdNgrJVYKp4Oqr2YUSkfScT5Rg&libraries=places`}
@@ -180,7 +188,7 @@ class Map extends React.Component {
 					}
 				/>
 				<div>
-				
+
 					<Container>
 						{this.state.placeData.map(place =>
 
