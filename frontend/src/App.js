@@ -60,8 +60,7 @@ class App extends Component{
 				<Route path ='/food' component={Food} />
 				<Route path ='/blog' component={ (props) => <Blog credentials= {this.state.credentials} blogs={this.state.blogs} writeBlog = {(details)=>this.writeBlog(details)}/>} />				
 				<Route  exact path="/login" component={LoginModal} />
-                <Route  path="/signup" component={SignUpModal} />         
-          
+                <Route  path="/signup" component={SignUpModal} />
 			</HashRouter>
 		)
 	}

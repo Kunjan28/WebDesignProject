@@ -1,35 +1,48 @@
-import React, {Component} from "react";
-import { Container, Row, Image, Carousel, Col, Form, Dropdown } from "react-bootstrap";
-import { Route } from "react-router-dom";
-import Continental from "./Cusines/Continental";
-import Italian from "./Cusines/Italian";
-import Vegan from "./Cusines/Vegan";
+import React, { Component } from "react";
+import { Container, Row, Image, Carousel, Col, Form, Dropdown, Card, Button, CardGroup } from "react-bootstrap";
+import Cuisine from "./Cusines/Cuisine";
 
-class Food extends Component{
-    render(){
-        return(
-            <Container>
-                <Row>
-                <Dropdown className="d-flex justify-content-center">
-                  <Dropdown.Toggle variant="success" id="dropdown-basic" >
-                    Select Cuisine
-                  </Dropdown.Toggle>
+class Food extends Component {
 
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="#/food/continental">Continental</Dropdown.Item>
-                    <Dropdown.Item href="#/food/italian">Italian</Dropdown.Item>
-                    <Dropdown.Item href="#/food/vegan">Vegan</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-                </Row>
-                <Row>
-                    <Route path='/food/continental' component = {Continental} />
-                    <Route path='/food/italian' component = {Italian} />
-                    <Route path='/food/vegan' component = {Vegan} />
-                </Row>
-            </Container>
-        )
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectValue: ""
+    };
+  }
+
+  handleDropdownChange = (e) => {
+    this.setState({ selectValue: e });
+  }
+
+  render() {
+
+    return (
+      <Container>
+        <Row>
+          <Dropdown className="d-flex justify-content-center" onSelect={this.handleDropdownChange}>
+            <Dropdown.Toggle variant="success" id="dropdown-basic" >
+              Select Cuisine
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item eventKey="continental">Continental</Dropdown.Item>
+              <Dropdown.Item eventKey="italian">Italian</Dropdown.Item>
+              <Dropdown.Item eventKey="mexican">Mexican</Dropdown.Item>
+              <Dropdown.Item eventKey="vegan">Vegan</Dropdown.Item>
+              <Dropdown.Item eventKey="indian">Indian</Dropdown.Item>
+              <Dropdown.Item eventKey="korean">Korean</Dropdown.Item>
+              <Dropdown.Item eventKey="american">American</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Row>
+
+        <br></br>
+        <Cuisine cuisine={this.state.selectValue} zipcode="02125"/>
+      </Container>
+
+    )
+  }
 }
 
 export default Food;
