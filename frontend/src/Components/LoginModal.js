@@ -77,7 +77,7 @@ export default class LoginModal extends Component {
               <Form.Control type="email" placeholder="Enter email" onChange={(e) => { this.setState({ emailId: e.target.value }) }} /> */}
 
               <div className="form_1">
-                <input type="text" autoComplete="off" required name="emailId" value={this.state.firstName} onChange={(e) => this.handleChange(e)} />
+                <input type="text" autoComplete="off" required name="emailId" onChange={(e) => { this.setState({ emailid: e.target.value }) }} />
                 <label htmlFor="name" className="label-name">
                   <span className="content-name">Enter email* </span>
                 </label>
@@ -88,7 +88,7 @@ export default class LoginModal extends Component {
               {/* <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" onChange={(e) => { this.setState({ password: e.target.value }) }} /> */}
               <div className="form_1">
-                <input type="text" autoComplete="off" required name="password" value={this.state.firstName} onChange={(e) => this.handleChange(e)} />
+                <input type="password" autoComplete="off" required name="password"  onChange={(e) => { this.setState({ password: e.target.value }) }} /> 
                 <label htmlFor="name" className="label-name">
                   <span className="content-name">Enter password* </span>
                 </label>

@@ -108,80 +108,80 @@ export default class SignUpModal extends Component {
     switch (name) {
       case "first_name":
         this.setState({ "firstName": value });
-        if (value.length <= 0) {
-          firstNameError = 'Invalid Name'
-          this.setState({ firstNameError });
-        }
-        else {
-          firstNameError = ''
-          this.setState({ firstNameError });
-        }
+        // if (value.length <= 0) {
+        //   firstNameError = 'Invalid Name'
+        //   this.setState({ firstNameError });
+        // }
+        // else {
+        //   firstNameError = ''
+        //   this.setState({ firstNameError });
+        // }
         break;
       case "last_name":
         this.setState({ "lastName": value });
-        if (value.length <= 0) {
-          lastNameError = 'Invalid Name'
-          this.setState({ lastNameError });
-        }
-        else {
-          lastNameError = ''
-          this.setState({ lastNameError });
-        }
+        // if (value.length <= 0) {
+        //   lastNameError = 'Invalid Name'
+        //   this.setState({ lastNameError });
+        // }
+        // else {
+        //   lastNameError = ''
+        //   this.setState({ lastNameError });
+        // }
         break;
       case "user_name":
         this.setState({ "userName": value });
-        if (value.length <= 0) {
-          userNameError = 'Invalid Name'
-          this.setState({ userNameError });
-        }
-        else {
-          userNameError = ''
-          this.setState({ userNameError });
-        }
+        // if (value.length <= 0) {
+        //   userNameError = 'Invalid Name'
+        //   this.setState({ userNameError });
+        // }
+        // else {
+        //   userNameError = ''
+        //   this.setState({ userNameError });
+        // }
         break;
       case "email":
         this.setState({ "emailId": value });
-        if (emailRegex.test(value)) {
-          emailIdError = ''
-          this.setState({ emailIdError });
-        } else {
-          emailIdError = 'Invalid Email'
-          this.setState({ emailIdError });
-        }
+        // if (emailRegex.test(value)) {
+        //   emailIdError = ''
+        //   this.setState({ emailIdError });
+        // } else {
+        //   emailIdError = 'Invalid Email'
+        //   this.setState({ emailIdError });
+        // }
         break;
 
       case "phone_num":
         this.setState({ "phoneNo": value });
-        if (regExPhone.test(value)) {
-          phoneNoError = ""
-          this.setState({ phoneNoError });
-        } else {
-          phoneNoError = "Wrong phone number"
-          this.setState({ phoneNoError });
-        }
+        // if (regExPhone.test(value)) {
+        //   phoneNoError = ""
+        //   this.setState({ phoneNoError });
+        // } else {
+        //   phoneNoError = "Wrong phone number"
+        //   this.setState({ phoneNoError });
+        // }
         break;
 
       case "password":
         this.setState({ "password": value });
-        if (passwordRegex.test(value)) {
-          passwordError = ""
-          this.setState({ passwordError });
+        // if (passwordRegex.test(value)) {
+        //   passwordError = ""
+        //   this.setState({ passwordError });
 
-        } else {
-          passwordError = "Input Password and Submit [7 to 15 characters which contain only characters, numeric digits, underscore and first character must be a letter]"
-          this.setState({ passwordError });
+        // } else {
+        //   passwordError = "Input Password and Submit [7 to 15 characters which contain only characters, numeric digits, underscore and first character must be a letter]"
+        //   this.setState({ passwordError });
 
-        }
+        // }
         break;
       case "password2":
         this.setState({ "password2": value });
-        if (value.length > 0 && value !== password) {
-          password2Error = "Passwords don't match"
-          this.setState({ password2Error });
-        } else {
-          password2Error = ""
-          this.setState({ password2Error });
-        }
+        // if (value.length > 0 && value !== password) {
+        //   password2Error = "Passwords don't match"
+        //   this.setState({ password2Error });
+        // } else {
+        //   password2Error = ""
+        //   this.setState({ password2Error });
+        // }
         break;
       default:
         break;
