@@ -27,6 +27,7 @@ class  BlogByUser extends Component{
                 this.setState((currentState) => ({
                     showBlogs: currentState.blogs.filter((c) => c.userName === this.props.userName )
                 }))
+                this.setState({showBlogs: this.state.showBlogs.reverse()})
 
                 console.log('mounted')
                 console.log(this.state)
@@ -48,9 +49,7 @@ class  BlogByUser extends Component{
                         return(
                             <Card key = {post._id} style={{ width: '100%' }}>
                               <Card.Body>
-                                <Card.Title className="text-center">{post.title}</Card.Title>
-                                <Card.Img variant="top" src={post.imagePath} />
-                                <Card.Subtitle className="mb-2 text-muted">{post.tag}</Card.Subtitle>
+                              <Card.Title className="text-center">{post.title}<Card.Subtitle className="mb-2 text-muted text-end">{post.tag}</Card.Subtitle></Card.Title>
                                 <Card.Text>
                                   {post.content}
                                 </Card.Text>

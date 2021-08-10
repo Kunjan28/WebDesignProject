@@ -9,6 +9,7 @@ import LoginModal from './Components/LoginModal';
 import SignUpModal from './Components/SignUpModal';
 import $ from 'jquery';
 import TopNav from './Components/TopNav';
+import BlogId from './Components/BlogId';
 
 
 class App extends Component{
@@ -58,8 +59,9 @@ class App extends Component{
 				<Route path ='/travel' component={Travel} />
 				<Route path ='/food' component={Food} />
 				<Route path ='/blog' component={ (props) => <Blog credentials= {this.state.credentials} blogs={this.state.blogs} writeBlog = {(details)=>this.writeBlog(details)}/>} />				
-				<Route  exact path="/login" component={LoginModal} />
-                <Route  path="/signup" component={SignUpModal} />
+				<Route exact path="/login" component={LoginModal} />
+                <Route path="/signup" component={SignUpModal} />
+                <Route exact path="/post/:id" component={BlogId} />
 			</HashRouter>
 		)
 	}

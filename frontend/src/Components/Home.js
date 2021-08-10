@@ -14,7 +14,7 @@ class Home extends Component{
             
             blogs: [],
             showBlogs: [],
-
+            reload:1,
             tagsList:['Sports','Food','Travel','Movies','Tech','Funny','Miscellaneous'],
             selectedTag:'none',
             currentUser: localStorage.getItem("user") !== null && localStorage.getItem("user") !== undefined
@@ -28,10 +28,13 @@ class Home extends Component{
             (response) => {
                 console.log(response.posts)
                 this.setState({blogs: response.posts, showBlogs: response.posts})
+                this.setState({showBlogs: this.state.showBlogs.reverse()})
                 console.log('mounted')
             }
         )
     }
+
+
     render(){
         console.log("render called")
         console.log(localStorage.getItem("user"))

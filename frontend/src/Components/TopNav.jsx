@@ -32,11 +32,11 @@ const TopNav = () => {
 					    <Nav.Link href="#home">Home</Nav.Link>
 					    <Nav.Link href="#travel">Travel</Nav.Link>
 						<Nav.Link href="#food">Food</Nav.Link>
-						<Nav.Link href="#blog">Blog</Nav.Link>
-					    
-					    <Nav.Link href="#" disabled>
-					      Link
-					    </Nav.Link>
+						{
+							localStorage.getItem('user') === null
+							? <Nav.Link href="#blog" disabled>Blog</Nav.Link>
+							: <Nav.Link href="#blog">Blog</Nav.Link>
+						}
                         {!localStorage.getItem('user') ?
               <Nav.Link to="/signup" activeClassName='active' as={NavLink} className="button_sign"><li>
                 Sign Up

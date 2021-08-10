@@ -74,7 +74,7 @@ export default class LoginModal extends Component{
                     <Form onSubmit= {this.handleLogin}>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" onChange={(e)=> {this.setState({emailId:e.target.value})}}/>
+                        <Form.Control type="email" placeholder="Enter email" onChange={(e)=> {this.setState({emailid:e.target.value})}}/>
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicPassword">

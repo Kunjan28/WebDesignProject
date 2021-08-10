@@ -64,7 +64,7 @@ class BlogServices {
 
     getPostById(id){
       return axios
-      .get(apiurl +"/id",
+      .get(apiurl +"id",
       {params:{ id:id} }
       )
       .then(response => { 

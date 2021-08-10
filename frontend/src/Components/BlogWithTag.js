@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
-import { Card, ListGroup, Button, Form } from 'react-bootstrap'
+import { Card, ListGroup, Button, Form, NavLink } from 'react-bootstrap'
+import { HashRouter, Link, Route } from 'react-router-dom';
 import BlogServices from '../services/blogs.services';
+import SingleBlog from './SingleBlog';
+import { FacebookShareButton, FacebookIcon } from "react-share";
+import { LinkedinShareButton, LinkedinIcon } from "react-share";
 
 class  BlogWithTag extends Component{
 
@@ -15,7 +19,8 @@ class  BlogWithTag extends Component{
         }
         this.state = {
             blogs: addBlogs,
-            tag: this.props.tag
+            tag: this.props.tag,
+            selectedBlog: undefined
         }
     }
 
@@ -31,23 +36,41 @@ class  BlogWithTag extends Component{
         return(
             <div key={this.props.tag}>
                 <h1>
-                    {this.props.tag}
+                
+                    {
+                        this.props.tag
+                    }
+                
                 </h1>
                 {console.log(this.state.blogs)}
                 {
-                    this.state.blogs.map((post)=>{
+                    this.state.selectedBlog !== undefined
+                    ? <HashRouter><Route path ={`/home/${this.state.selectedBlog._id}`} component = { (props) => <SingleBlog blog={this.state.selectedBlog}/>}/></HashRouter>
+                    : this.state.blogs.map((post)=>{
                         // console.log(post)
                         return(
                             <Card key = {post._id} style={{ width: '100%' }}>
                               <Card.Body>
                                 <Card.Title className="text-center">{post.title}<Card.Subtitle className="mb-2 text-muted text-end">{post.tag}</Card.Subtitle></Card.Title>
-                                <Card.Text>{`Author: ${post.userName}`}</Card.Text>
+                                <NavLink 
+                                href={`#post/${post._id}`}
+                                target="_blank"
+                                 ><Card.Text>{`Author: ${post.userName}`}</Card.Text></NavLink>
                                 <Card.Text>
-                                  {`${post.content}`}
+                                    {
+                                        post.content.split("\n").map((line) => {
+                                            return (
+                                                <span>
+                                                    {line}
+                                                    <br />
+                                                </span>
+                                             )
+                                        })
+                                    }
                                 </Card.Text>
                                 <Button 
                                 className='btn-sm'
-                                
+                                style={localStorage.getItem("user")=== null? {display:'none'}:{display:'block'}}
                                 onClick={
                                     (e) => {
                                         this.setState( (currentState) => ({
@@ -128,6 +151,14 @@ class  BlogWithTag extends Component{
                                     
                                 </ListGroup>
                               </Card.Body>
+                                <Card.Footer>
+                                    < FacebookShareButton url={'http://localhost:3000/#/post/'+post._id}>
+                                      <FacebookIcon logoFillColor="white" size ={33} round/>
+                                        </FacebookShareButton>
+                                        < LinkedinShareButton url={'http://localhost:3000/#/post/'+post._id}>
+                                      <LinkedinIcon logoFillColor="white" size ={33} round/>
+                                        </LinkedinShareButton>
+                                </Card.Footer>
                             </Card>
                         )
                     })
