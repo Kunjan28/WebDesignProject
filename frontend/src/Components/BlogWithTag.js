@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import { Card, ListGroup, Button, Form, NavLink } from 'react-bootstrap'
-import { HashRouter, Link, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import BlogServices from '../services/blogs.services';
 import SingleBlog from './SingleBlog';
 import { FacebookShareButton, FacebookIcon } from "react-share";
 import { LinkedinShareButton, LinkedinIcon } from "react-share";
+import './blogs.scss'
 
 class  BlogWithTag extends Component{
 
@@ -38,7 +39,9 @@ class  BlogWithTag extends Component{
                 <h1>
                 
                     {
-                        this.props.tag
+                        this.props.tag!== 'All'
+                        ? this.props.tag
+                        :''
                     }
                 
                 </h1>
@@ -49,15 +52,17 @@ class  BlogWithTag extends Component{
                     : this.state.blogs.map((post)=>{
                         // console.log(post)
                         return(
-                            <Card key = {post._id} style={{ width: '100%' }}>
-                              <Card.Body>
-                                <Card.Title className="text-center">{post.title}<Card.Subtitle className="mb-2 text-muted text-end">{post.tag}</Card.Subtitle></Card.Title>
+                            <Card className='blog-card' key = {post._id} style={{ width: '100%' }}>
+                              
                                 <NavLink 
                                 href={`#post/${post._id}`}
                                 target="_blank"
-                                 ><Card.Text>{`Author: ${post.userName}`}</Card.Text></NavLink>
-                                <Card.Text>
-                                    {
+                                 ><Card.Title className="text-center blog-card-title"><h2>{post.title}</h2><Card.Subtitle className="mb-2 text-end blog-card-subtitle">{post.tag}</Card.Subtitle></Card.Title></NavLink>
+                                <Card.Text className='blog-card-subtitle'>{`Author: ${post.userName}`}</Card.Text>
+                               
+                                
+                                <Card.Text className='blog-card-text'>
+                                {
                                         post.content.split("\n").map((line) => {
                                             return (
                                                 <span>
@@ -68,8 +73,12 @@ class  BlogWithTag extends Component{
                                         })
                                     }
                                 </Card.Text>
+                                    
+                                <Card.Subtitle className="mb-2 text-end blog-card-subtitle">Posted on: {post.postDate}</Card.Subtitle>
+                                
+                                <Card.Footer className='blog-card-footer'>
                                 <Button 
-                                className='btn-sm'
+                                className='btn-sm btn-comment'
                                 style={localStorage.getItem("user")=== null? {display:'none'}:{display:'block'}}
                                 onClick={
                                     (e) => {
@@ -89,23 +98,22 @@ class  BlogWithTag extends Component{
                                             })
                                         }))
                                     }
-                                }>{post.buttonText}</Button>
-                                
+                                }>{post.buttonText}
+                                </Button>
+
                                 <ListGroup variant="flush" style={{display:post.commentVisibility}}>
-                                {
+                                    {
                                         post.comments.length === 0
                                         ? <div>No comments</div>
                                         : post.comments.map((comment) => {
-                                            return <ListGroup.Item key ={comment.comment}>
-                                                <Card>
-                                                    <Card.Body>
-                                                        <Card.Subtitle>
+                                            return <ListGroup.Item className="comment-list" key ={comment._id}>
+                                                <Card className="comment-card">
+                                                        <Card.Subtitle className="comment-sub">
                                                             {comment.userName}
-                                                        </Card.Subtitle>
-                                                        <Card.Text>
+                                                        </Card.Subtitle >
+                                                        <Card.Text className="comment-text">
                                                             {comment.comment}
                                                         </Card.Text>
-                                                    </Card.Body>
                                                 </Card>
                                             </ListGroup.Item>
                                         })
@@ -113,6 +121,7 @@ class  BlogWithTag extends Component{
                                         <Form className='form-tag'>
                                             <Form.Group className="mb-3" controlId="formFirstName">
                                                 <Form.Control 
+                                                className='form-comment'
                                                 type="text" 
                                                 placeholder="Write a comment"
                                                 value={post.currentComment}
@@ -128,7 +137,7 @@ class  BlogWithTag extends Component{
                                                 }} />
                                             </Form.Group>
                                             <Button
-                                            className='btn-sm'
+                                            className='btn-sm btn-reply'
                                             onClick = {(e)=>{
                                                 BlogServices.addPostComment(post._id, this.props.userName,post.currentComment).then( () =>{
                                                     // window.location.reload();
@@ -147,15 +156,13 @@ class  BlogWithTag extends Component{
                                                 }))
                                             }}
                                             > Reply</Button>
-                                        </Form>
-                                    
+                                        </Form>    
                                 </ListGroup>
-                              </Card.Body>
-                                <Card.Footer>
-                                    < FacebookShareButton url={'http://localhost:3000/#/post/'+post._id}>
+
+                                    < FacebookShareButton className='footer-icon' url={'http://localhost:3000/#/post/'+post._id}>
                                       <FacebookIcon logoFillColor="white" size ={33} round/>
                                         </FacebookShareButton>
-                                        < LinkedinShareButton url={'http://localhost:3000/#/post/'+post._id}>
+                                        < LinkedinShareButton className='footer-icon' url={'http://localhost:3000/#/post/'+post._id}>
                                       <LinkedinIcon logoFillColor="white" size ={33} round/>
                                         </LinkedinShareButton>
                                 </Card.Footer>

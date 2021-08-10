@@ -1,9 +1,10 @@
 import React, {Component} from "react";
-import { Nav, Navbar } from "react-bootstrap";
+import { ListGroup, Nav, Navbar } from "react-bootstrap";
 import { Col, Container, Row } from "react-bootstrap";
 import BlogWithTag from "./BlogWithTag";
 import BlogServices from '../services/blogs.services';
 import Loading from "./Loading";
+import './blogs.scss'
 
 
 class Home extends Component{
@@ -15,8 +16,8 @@ class Home extends Component{
             blogs: [],
             showBlogs: [],
             reload:1,
-            tagsList:['Sports','Food','Travel','Movies','Tech','Funny','Miscellaneous'],
-            selectedTag:'none',
+            tagsList:['All','Sports','Food','Travel','Movies','Tech','Funny','Miscellaneous'],
+            selectedTag:'All',
             currentUser: localStorage.getItem("user") !== null && localStorage.getItem("user") !== undefined
                     ? JSON.parse(localStorage.getItem("user")).userName
                     : ''
@@ -42,29 +43,40 @@ class Home extends Component{
         return(
             <Container>
                 <Row>
-                    <Col md={2}>
-                        <Navbar>
-                            <Nav className="flex-column">
+                    <Col lg={2} md={3} sm={12}>
+                        <Navbar expand='md'>
+                        <Navbar.Toggle aria-controls="tagScroll" >View Tags</Navbar.Toggle>
+                        <Navbar.Collapse id="tagScroll" >
+                            <Nav>
+                                <ListGroup className="my-2" vertical>
                                 {
                                     this.state.tagsList.map((tag)=>{
                                         const lnk = 'blog/'+tag;
-                                        return <Nav.Link key={tag} 
-                                        onClick={(e)=> {
+                                        return <ListGroup.Item className="tag-list-item">
+                                        <Nav.Link 
+                                            className='tag-list-itam-nav'
+                                            key={tag} 
+                                            onClick={(e)=> {
                                             console.log(tag)
-                                            this.setState((currentState) => ({
+                                            tag==='All'
+                                            ? this.setState({showBlogs: this.state.blogs})
+                                            : this.setState((currentState) => ({
                                                 showBlogs: currentState.blogs.filter( (c) => {
                                                     return c.tag === tag
                                                 })
                                             }))
                                             this.setState({selectedTag:tag})
                                             console.log('state changed')
-                                        }} >{tag}</Nav.Link>
+                                        }} >{tag}</Nav.Link></ListGroup.Item>
                                     })
                                 }
+                                </ListGroup>
+                                
                             </Nav>
+                        </Navbar.Collapse>
                         </Navbar>
                     </Col>
-                    <Col md={7}>
+                    <Col lg={7} md={9} sm={12}>
                     {console.log(this.state.currentUser)}
                         {
                             this.state.blogs.length === 0
