@@ -3,6 +3,10 @@ import PlaceCard from './PlaceCard';
 import { Button, InputGroup, FormControl, Container } from "react-bootstrap";
 import { GoogleMap, InfoWindow, Marker, withGoogleMap, withScriptjs } from "react-google-maps"
 import SearchBox from 'react-google-maps/lib/components/places/SearchBox';
+import travelImg from './136008.jpg';
+import img2 from './travelImg2.png';
+import img3 from './travelImg3.jfif';
+import { Row, Image, Carousel, Col } from "react-bootstrap";
 
 
 
@@ -15,15 +19,15 @@ class Map extends React.Component {
 		this.state = {
 
 			mapPosition: {
-				lat: 37.317250,
-				lng: -121.909490
+				lat: 19.8967662,
+				lng: -155.5827818
 			},
 			markerPosition: {
-				lat: 37.317250,
-				lng: -121.909490
+				lat: 19.8967662,
+				lng: -155.5827818
 			},
 			placeData: [],
-			search: "", clippedSearch: ""
+			search: "", clippedSearch: "Hawaii"
 		}
 	}
 
@@ -56,6 +60,7 @@ class Map extends React.Component {
 
 	fetchDataBasedOnCordinates = (latValue, lngValue) => {
 		const placeURL = this.getPlacesNearBySearchURL(latValue, lngValue);
+		console.log(placeURL)
 		fetch(placeURL)
 			.then(res => res.json())
 			.then(data => data.results.filter(result => result.types.includes("point_of_interest")))
@@ -75,7 +80,7 @@ class Map extends React.Component {
 	}
 
 	getPlacesNearBySearchURL = (lat, long) => {
-		return `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=6000&type=point_of_interest=&key=AIzaSyC5FmYAUnhQ6QJcswd2SkFZmWmfRqcjnqc`;
+		return `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=60000&type=point_of_interest=&key=AIzaSyC5FmYAUnhQ6QJcswd2SkFZmWmfRqcjnqc`;
 	}
 
 	onChange = (ev) => {
@@ -129,20 +134,7 @@ class Map extends React.Component {
 				props => (
 					<GoogleMap
 						defaultZoom={10}
-						defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
-
-					>
-
-						{/* InfoWindow on top of marker */}
-						{/* <InfoWindow
-                    onClose={this.onInfoWindowClose}
-                    position={{ lat: ( this.state.markerPosition.lat + 0.0018 ), lng: this.state.markerPosition.lng }}
-                  >
-                    <div>
-                      <span style={{ padding: 0, margin: 0 }}>{ this.state.address }</span>
-                    </div>
-                  </InfoWindow> */}
-						{/*Marker*/}
+						defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}>
 
 						<Marker
 							name={'Dolores park'}
@@ -159,47 +151,78 @@ class Map extends React.Component {
 		return (
 
 
-			<div> 
+			<div class="row" >
 
 
-				<InputGroup className="mb-3">
-					<FormControl
-						placeholder="Enter place you want to visit and click Search"
-						aria-label="Recipient's username"
-						aria-describedby="basic-addon2"
-						value={this.state.city}
-						onInput={this.onChange}
-					/>
-					<Button variant="outline-primary" active id="button-addon2" onClick={this.onSubmit}>
-						Search
-					</Button>
-				</InputGroup>
-				<AsyncMap
+				<div class="col-md-4" style={{ backgroundImage: `url(${travelImg})`, width: `1700px`, height: `500px` }}>
 
-					googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyBJd54lkWdNgrJVYKp4Oqr2YUSkfScT5Rg&libraries=places`}
-					loadingElement={
-						<div style={{ height: `100%` }} />
-					}
-					containerElement={
-						<div style={{ height: 500 }} />
-					}
-					mapElement={
-						<div style={{ height: `100%` }} />
-					}
-				/>
+					<InputGroup style={{ paddingTop: `10px`, margin: `40px`, maxWidth: `1000px`, paddingTop: 100, paddingLeft: 400 }} className="mb-3">
+						<FormControl
+							placeholder="Enter place you want to visit and click Search"
+							aria-label="Recipient's username"
+							aria-describedby="basic-addon2"
+							value={this.state.city}
+							onInput={this.onChange}
+						/>
+						<Button variant="outline-primary" active id="button-addon2" onClick={this.onSubmit}>
+							Search
+						</Button>
+					</InputGroup>
+
+				</div>
+				<div style={{ backgroundColor: `#00293c` }}>
+					<Row>
+						<div class="col-md-4" style={{ margin: '50px' }} >
+							<AsyncMap
+
+								googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyBJd54lkWdNgrJVYKp4Oqr2YUSkfScT5Rg&libraries=places`}
+								loadingElement={
+									<div style={{ height: `100%` }} />
+								}
+								containerElement={
+									<div style={{ height: 400, width: 500 }} />
+								}
+								mapElement={
+									<div style={{ height: `100%`, width: '100%' }} />
+								}
+							/>
+						</div>
+						<div class="col-md-5">
+							<p style={{ color: `white`, fontSize: '70px', fontFamily: `cursive`, textAlign: `center`, paddingTop: `80px` }}>
+								Great Choice..!! Let's Explore {this.state.clippedSearch} :)
+							</p>
+
+						</div>
+					</Row>
+
+				</div>
+				<div>
+					{this.state.placeData.map(place =>
+
+						<div className="row">
+							{place.name}
+						</div>
+
+
+					)}
+				</div>
 				<div>
 
 					<Container>
+
 						{this.state.placeData.map(place =>
 
-							<div style={{ margin: '30px' }}>
+							<div className="Row" style={{ margin: '30px' }}>
 								<PlaceCard placeDetails={place}></PlaceCard>
 							</div>
 
 
 						)}
+
 					</Container>
 				</div>
+
+
 			</div>
 		)
 	}

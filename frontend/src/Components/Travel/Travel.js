@@ -4,6 +4,9 @@ import { GoogleMap, InfoWindow, Marker, withGoogleMap, withScriptjs } from "reac
 import Geocode from "react-geocode";
 import Map from './Map'
 import Place from './Place'
+import img1 from './travelImg1.jfif';
+import img2 from './travelImg2.png';
+import img3 from './travelImg3.jfif';
 Geocode.setApiKey('AIzaSyBJd54lkWdNgrJVYKp4Oqr2YUSkfScT5Rg');
 
 Geocode.enableDebug();
@@ -14,8 +17,8 @@ class Travel extends Component {
 
     super(props);
     this.state = {
-      lat: 37.317250,
-      lng: -121.909490
+      lat: 19.8967662,
+      lng: -155.5827818
 
     }
   }
@@ -38,6 +41,7 @@ class Travel extends Component {
   
           <div>
             <Map handleFormSubmit={this.handleSubmit} />
+           
           </div>
       
     )
