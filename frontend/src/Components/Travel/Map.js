@@ -4,10 +4,6 @@ import { Button, InputGroup, FormControl, Container } from "react-bootstrap";
 import { GoogleMap, InfoWindow, Marker, withGoogleMap, withScriptjs } from "react-google-maps"
 import SearchBox from 'react-google-maps/lib/components/places/SearchBox';
 import travelImg from './136008.jpg';
-import img2 from './travelImg2.png';
-import img3 from './travelImg3.jfif';
-import { Row, Image, Carousel, Col } from "react-bootstrap";
-
 
 
 class Map extends React.Component {
@@ -150,13 +146,13 @@ class Map extends React.Component {
 		);
 		return (
 
+			<div>
 
-			<div class="row" >
 
+				{/* Image with Searchbar */}
+				<div style={{ backgroundImage: `url(${travelImg})`, backgroundSize:'cover',width: `100%`, height: `700px` }}>
 
-				<div class="col-md-4" style={{ backgroundImage: `url(${travelImg})`, width: `1700px`, height: `500px` }}>
-
-					<InputGroup style={{ paddingTop: `10px`, margin: `40px`, maxWidth: `1000px`, paddingTop: 100, paddingLeft: 400 }} className="mb-3">
+					<InputGroup style={{ maxWidth: `80%`, height:'33%', paddingTop:'7%', paddingLeft:'20%' }}>
 						<FormControl
 							placeholder="Enter place you want to visit and click Search"
 							aria-label="Recipient's username"
@@ -164,57 +160,54 @@ class Map extends React.Component {
 							value={this.state.city}
 							onInput={this.onChange}
 						/>
-						<Button variant="outline-primary" active id="button-addon2" onClick={this.onSubmit}>
+						<Button style={{ backgroundColor:'#00293c', width: '15%'}} variant="outline-primary" active onClick={this.onSubmit}>
 							Search
 						</Button>
 					</InputGroup>
 
 				</div>
+
+
+				{/* Map with desc */}
 				<div style={{ backgroundColor: `#00293c` }}>
-					<Row>
-						<div class="col-md-4" style={{ margin: '50px' }} >
+					<div className="row">
+
+						<div class="col-md-5" style={{ margin: '1%' }} >
 							<AsyncMap
 
 								googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyBJd54lkWdNgrJVYKp4Oqr2YUSkfScT5Rg&libraries=places`}
 								loadingElement={
 									<div style={{ height: `100%` }} />
 								}
-								containerElement={
-									<div style={{ height: 400, width: 500 }} />
+								containerElement={<div style={{ height: '500px' }} />
 								}
 								mapElement={
-									<div style={{ height: `100%`, width: '100%' }} />
+									<div style={{ height: `100%` }} />
 								}
 							/>
 						</div>
 						<div class="col-md-5">
-							<p style={{ color: `white`, fontSize: '70px', fontFamily: `cursive`, textAlign: `center`, paddingTop: `80px` }}>
+							<p style={{ color: `white`, fontSize: '100px', fontFamily: `cursive`, textAlign: `center`, paddingTop: `80px` }}>
 								Great Choice..!! Let's Explore {this.state.clippedSearch} :)
 							</p>
 
 						</div>
-					</Row>
+
+
+					</div>
 
 				</div>
-				
-				<div>
-
-					<Container>
-
-						{this.state.placeData.map(place =>
-
-							<div className="Row" style={{ margin: '30px' }}>
-								<PlaceCard placeDetails={place}></PlaceCard>
-							</div>
 
 
-						)}
-
-					</Container>
+				{/* Map with desc */}
+				<div class="card-group" style={{ marginLeft: 'auto', marginRight: 'auto', alignContent: 'center' }}>
+					{this.state.placeData.map(place =>
+						<PlaceCard placeDetails={place}></PlaceCard>
+					)}
 				</div>
 
 
-			</div>
+			</div >
 		)
 	}
 }
