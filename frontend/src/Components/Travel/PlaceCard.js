@@ -24,11 +24,11 @@ const PlaceCard = ({ placeDetails }) => {
       :
       (
         <div class="col-md-4" style={{display:`flex`}}>
-          <div class="card" style={{ maxWidth: `100%`,maxHeight:`500px`,minWidth:`100%`,minHeight:`500px` }}>
-            <img class="card-img-top" src={getImage(placeDetails.photos)} style={{minHeight:`70%`,maxHeight:`70%` }}></img>
-            <div class="card-body">
-              <h5 class="card-title">{placeDetails.name}</h5>
-              <p class="card-text"> Ratings:{placeDetails.rating} &nbsp;&nbsp;
+          <div class="card" style={{ maxWidth: `100%`,maxHeight:`500px`,minWidth:`100%`,minHeight:`500px`, borderColor:`#00293c`,borderStyle: `solid 1 px`}}>
+            <img class="card-img-top" src={getImage(placeDetails.photos)} style={{minHeight:`70%`,maxHeight:`70%`,borderColor:`#00293c`,borderStyle: `double` }}></img>
+            <div class="card-body" style={{fontFamily:`cursive`, fontVariant:`historical-forms`,fontWeight:`bolder`}}>
+              <h5 class="card-title" style={{color:`00293c`,fontWeight:`bolder`}}>{placeDetails.name}</h5>
+              <p class="card-text"> <b>Ratings:</b>{placeDetails.rating} &nbsp;&nbsp;
                 User Ratings:{placeDetails.user_ratings_total}</p>
               <p class="card-text">Vicinity:{placeDetails.vicinity}</p>
             </div>

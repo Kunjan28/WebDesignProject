@@ -157,7 +157,7 @@ class Map extends React.Component {
 
 
 				{/* Image with Searchbar */}
-				<div style={{ backgroundImage: `url(${travelImg})`, backgroundSize:'cover',width: `100%`, height: `700px` }}>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style={{ backgroundImage: `url(${travelImg})`, backgroundSize:'cover', WebkitBackgroundSize:`cover`,MozBackgroundSize:`cover`,oBackgroundSize: `cover`,maxHeight: `600px`,minHeight: `600px`, minWidth:`100%`}}>
 
 					<InputGroup style={{ maxWidth: `80%`, height:'25%', paddingTop:'7%', paddingLeft:'20%' }}>
 						<FormControl
@@ -168,7 +168,7 @@ class Map extends React.Component {
 							onInput={this.onChange}
 						/>
 						
-						<Button style={{ backgroundColor:'#00293c', width: '15%'}} variant="outline-primary" active onClick={this.onSubmit}>
+						<Button style={{ backgroundColor:'#00293c'}} variant="outline-primary" active onClick={this.onSubmit}>
 							Search
 						</Button>
 					</InputGroup>
