@@ -10,6 +10,9 @@ import SignUpModal from './Components/SignUpModal';
 import $ from 'jquery';
 import TopNav from './Components/TopNav';
 import BlogId from './Components/BlogId';
+import Footer from './Components/Footer/footer';
+import SocialMedia from './Components/SocialMedia.js/SocialMedia';
+
 
 
 class App extends Component{
@@ -33,7 +36,6 @@ class App extends Component{
     }
 
 	writeBlog = (details) => {
-		var api = "" //api to post the blog
 		//blog should have tags, post, email
 	}
 
@@ -52,8 +54,9 @@ class App extends Component{
 
 	render(){
 		return(
-			<HashRouter>
+            <HashRouter>
 				<TopNav/>
+              
 				<Route exact path ='/' component={Home}/>
 				<Route path ='/home' component={ Home} />
 				<Route path ='/travel' component={Travel} />
@@ -62,7 +65,10 @@ class App extends Component{
 				<Route exact path="/login" component={LoginModal} />
                 <Route path="/signup" component={SignUpModal} />
                 <Route exact path="/post/:id" component={BlogId} />
-			</HashRouter>
+             
+                <SocialMedia />
+          <Footer />
+          </HashRouter>
 		)
 	}
 }
