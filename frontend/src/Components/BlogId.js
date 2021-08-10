@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import BlogServices from '../services/blogs.services';
-import { withRouter } from "react-router";
 import { Container } from "react-bootstrap";
 import SingleBlog from "./SingleBlog";
 import Loading from "./Loading";

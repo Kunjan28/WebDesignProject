@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
-import { Card, ListGroup, Button, Form } from 'react-bootstrap'
+import { Card, ListGroup, Button, Form, NavLink } from 'react-bootstrap'
 import BlogServices from '../services/blogs.services';
 import Loading from './Loading';
+import { FacebookShareButton, FacebookIcon } from "react-share";
+import { LinkedinShareButton, LinkedinIcon } from "react-share";
+import './blogs.scss'
 
 class  BlogByUser extends Component{
 
@@ -47,13 +50,34 @@ class  BlogByUser extends Component{
                     ? <Loading />
                     : this.state.showBlogs.map((post)=>{
                         return(
-                            <Card key = {post._id} style={{ width: '100%' }}>
-                              <Card.Body>
-                              <Card.Title className="text-center">{post.title}<Card.Subtitle className="mb-2 text-muted text-end">{post.tag}</Card.Subtitle></Card.Title>
-                                <Card.Text>
-                                  {post.content}
+                            <Card className='blog-card' key = {post._id} style={{ width: '100%' }}>
+                              
+                                <NavLink 
+                                href={`#post/${post._id}`}
+                                target="_blank"
+                                 ><Card.Title className="text-center blog-card-title"><h2>{post.title}</h2><Card.Subtitle className="mb-2 text-end blog-card-subtitle">{post.tag}</Card.Subtitle></Card.Title></NavLink>
+                                <Card.Text className='blog-card-subtitle'>{`Author: ${post.userName}`}</Card.Text>
+                               
+                                
+                                <Card.Text className='blog-card-text'>
+                                {
+                                        post.content.split("\n").map((line) => {
+                                            return (
+                                                <span>
+                                                    {line}
+                                                    <br />
+                                                </span>
+                                             )
+                                        })
+                                    }
                                 </Card.Text>
-                                <Button className='btn-sm'
+                                    
+                                <Card.Subtitle className="mb-2 text-end blog-card-subtitle">Posted on: {post.postDate}</Card.Subtitle>
+                                
+                                <Card.Footer className='blog-card-footer'>
+                                <Button 
+                                className='btn-sm btn-comment'
+                                style={localStorage.getItem("user")=== null? {display:'none'}:{display:'block'}}
                                 onClick={
                                     (e) => {
                                         this.setState( (currentState) => ({
@@ -72,23 +96,22 @@ class  BlogByUser extends Component{
                                             })
                                         }))
                                     }
-                                }>{post.buttonText}</Button>
-                                
+                                }>{post.buttonText}
+                                </Button>
+
                                 <ListGroup variant="flush" style={{display:post.commentVisibility}}>
-                                {
+                                    {
                                         post.comments.length === 0
                                         ? <div>No comments</div>
                                         : post.comments.map((comment) => {
-                                            return <ListGroup.Item key ={comment.comment}>
-                                                <Card>
-                                                    <Card.Body>
-                                                        <Card.Subtitle>
+                                            return <ListGroup.Item className="comment-list" key ={comment._id}>
+                                                <Card className="comment-card">
+                                                        <Card.Subtitle className="comment-sub">
                                                             {comment.userName}
-                                                        </Card.Subtitle>
-                                                        <Card.Text>
+                                                        </Card.Subtitle >
+                                                        <Card.Text className="comment-text">
                                                             {comment.comment}
                                                         </Card.Text>
-                                                    </Card.Body>
                                                 </Card>
                                             </ListGroup.Item>
                                         })
@@ -96,13 +119,14 @@ class  BlogByUser extends Component{
                                         <Form className='form-tag'>
                                             <Form.Group className="mb-3" controlId="formFirstName">
                                                 <Form.Control 
+                                                className='form-comment'
                                                 type="text" 
                                                 placeholder="Write a comment"
                                                 value={post.currentComment}
                                                 onChange={(e)=>{
                                                     this.setState( (currentState) => ({
                                                         blogs: currentState.blogs.map((c) =>{
-                                                            if(c._id === post._id) {
+                                                            if(c.title === post.title) {
                                                                 c.currentComment=e.target.value
                                                             }
                                                             return c
@@ -111,9 +135,8 @@ class  BlogByUser extends Component{
                                                 }} />
                                             </Form.Group>
                                             <Button
-                                            className='btn-sm'
+                                            className='btn-sm btn-reply'
                                             onClick = {(e)=>{
-                                               // console.log(post.currentComment)
                                                 BlogServices.addPostComment(post._id, this.props.userName,post.currentComment).then( () =>{
                                                     // window.location.reload();
                                                 },error =>{
@@ -121,7 +144,7 @@ class  BlogByUser extends Component{
                                                 })
                                                 this.setState((currentState) => ({
                                                     blogs: currentState.blogs.map((c) =>{
-                                                        if(c._id === post._id) {
+                                                        if(c.title === post.title) {
                                                             c.comments = c.comments.concat([{userName:c.userName, comment:c.currentComment}])
                                                             console.log(c.comments)
                                                             c.currentComment=''
@@ -131,10 +154,16 @@ class  BlogByUser extends Component{
                                                 }))
                                             }}
                                             > Reply</Button>
-                                        </Form>
-                                    
+                                        </Form>    
                                 </ListGroup>
-                              </Card.Body>
+
+                                    < FacebookShareButton className='footer-icon' url={'http://localhost:3000/#/post/'+post._id}>
+                                      <FacebookIcon logoFillColor="white" size ={33} round/>
+                                        </FacebookShareButton>
+                                        < LinkedinShareButton className='footer-icon' url={'http://localhost:3000/#/post/'+post._id}>
+                                      <LinkedinIcon logoFillColor="white" size ={33} round/>
+                                        </LinkedinShareButton>
+                                </Card.Footer>
                             </Card>
                         )
                     })

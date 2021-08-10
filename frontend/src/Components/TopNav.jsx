@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { Container, Nav, Navbar, Form , NavDropdown, FormControl, Button} from 'react-bootstrap';
+import { Container, Nav, Navbar, Form , FormControl, Button} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 import AuthService from "../services/auth.services";
+import '../css/mainTheme.scss'
 
 const logout = () => {
   AuthService.logout();
@@ -15,52 +16,41 @@ const logout = () => {
 
 const TopNav = () => {
   return (
-    <Navbar bg="light" expand="lg">
-        <Container>
+    <Navbar className='navbar-main sticky-top' bg="light" expand="lg">
         {!localStorage.getItem('user') ?
-          <Navbar.Brand href='/'>Welcome Guest!</Navbar.Brand> :
-          <Navbar.Brand href='/'>Welcome {JSON.parse(localStorage.getItem("user")).firstName}!</Navbar.Brand>}
+          <Navbar.Brand className='navbar-title' href='/'>Welcome Guest!</Navbar.Brand> :
+          <Navbar.Brand className='navbar-title' href='/'>Welcome {JSON.parse(localStorage.getItem("user")).firstName}!</Navbar.Brand>}
       
 					{/* <Navbar.Brand href="#">Some Title</Navbar.Brand> */}
-					<Navbar.Toggle aria-controls="navbarScroll" />
-					<Navbar.Collapse id="navbarScroll">
+					<Navbar.Toggle aria-controls="navbar-Scroll" className="nav-toggle" />
+					<Navbar.Collapse id="navbar-Scroll" >
 					  <Nav
-					    className="mr-auto my-2 my-lg-0"
+					    className="mr-auto my-2 my-lg-0 navbar-nav-part"
 					    style={{ maxHeight: '100px' }}
 					    navbarScroll
 					  >
-					    <Nav.Link href="#home">Home</Nav.Link>
-					    <Nav.Link href="#travel">Travel</Nav.Link>
-						<Nav.Link href="#food">Food</Nav.Link>
+					    <Nav.Link activeClassName="active" className='navbar-text' href="#home">Home</Nav.Link>
+					    <Nav.Link activeClassName="active" className='navbar-text' href="#travel">Travel</Nav.Link>
+						<Nav.Link activeClassName="active" className='navbar-text' href="#food">Food</Nav.Link>
 						{
 							localStorage.getItem('user') === null
-							? <Nav.Link href="#blog" disabled>Blog</Nav.Link>
-							: <Nav.Link href="#blog">Blog</Nav.Link>
+							? <Nav.Link activeClassName="active" className='navbar-text' href="#blog" disabled>My Blog</Nav.Link>
+							: <Nav.Link activeClassName="active" className='navbar-text' href="#blog">My Blogs</Nav.Link>
 						}
                         {!localStorage.getItem('user') ?
-              <Nav.Link to="/signup" activeClassName='active' as={NavLink} className="button_sign"><li>
+              <Nav.Link to="/signup" activeClassName='active' as={NavLink} className="button_sign navbar-text"><li>
                 Sign Up
                 </li></Nav.Link> : null}
             {!localStorage.getItem('user') ?
-              <Nav.Link to="/login" activeClassName='active' as={NavLink} className="button_sign"><li>
+              <Nav.Link to="/login" activeClassName='active' as={NavLink} className="button_sign navbar-text"><li>
                 Login
                 </li></Nav.Link> :
-              <Nav.Link to="/" onClick={logout} activeClassName='active' as={NavLink} className="button_sign"><li>
+              <Nav.Link to="/" onClick={logout} as={NavLink} className="button_sign navbar-text"><li>
                 Logout
                 </li></Nav.Link>}
 
 					  </Nav>
-					  <Form className="d-flex">
-					    <FormControl
-					      type="search"
-					      placeholder="Search"
-					      className="mr-2"
-					      aria-label="Search"
-					    />
-					    <Button variant="outline-success">Search</Button>
-					  </Form>
 					</Navbar.Collapse>
-                    </Container>
 				</Navbar>
   );
 };
