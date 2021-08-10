@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import { Container, Row, Image, Carousel, Col, Form, Dropdown, Card, Button, CardGroup } from "react-bootstrap";
+import { Container, Row, Image, Carousel, Col, Form, Dropdown, Card, Button, CardGroup,Header } from "react-bootstrap";
+import "./Cusines.css";
 
-const DOCUMENU_API_KEY = "963172ed9c884ccff7166838b27ca4a6";
+const DOCUMENU_API_KEY = "cff91f44c684a03c1b4d509c5085c946";
 const SPOONACULAR_API_KEY = "adef6fa141fa432796e6d6a8aaa8d63b";
 
 class Cuisine extends Component{
@@ -36,11 +37,11 @@ class Cuisine extends Component{
 
     render( props ) {
         return(
-        <div>
+        <div className = "Cusines">
         <Row className="rows">
-          <Col className="columns" md={8}>
+          <Col className="columns" md={6}>
             { this.state.restaurants.map((res) => {
-                return <div>
+                return <div className = "restaurant">
                     <Card style={{ width: '100%' }}>
                         <Card.Body>
                         <Card.Title>{ res.restaurant_name }</Card.Title>
@@ -59,9 +60,9 @@ class Cuisine extends Component{
             <br></br>
           </Col>
 
-          <Col className="columns" lg={4}>
+          <Col className="columns" lg={6}>
           { this.state.recipes.map((recipe) => {
-            return <div><Card style={{ width: '100%' }}>
+            return <div className = "recipe"><Card style={{ width: '100%' }}>
                 <Card.Img variant="top" src="holder.js/100px180" src={ recipe.image } />
                 <Card.Body>
                 <Card.Title>{ recipe.title }</Card.Title>
