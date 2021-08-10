@@ -109,3 +109,15 @@ exports.update = (req, res) => {
       });
   };
   
+
+  exports.getPostById = (req, res) => {
+    Post.findOne({ _id: req.query.id })
+     
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((error) => {
+        res.status(500).json({ error });
+      });
+  };
+  

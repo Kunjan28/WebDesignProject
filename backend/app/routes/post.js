@@ -21,6 +21,11 @@ module.exports =  (app)=> {
   );
 
   app.get(
+    "/api/post/id",
+    controller.getPostById // get posts by id
+  );
+
+  app.get(
     "/api/post/",
     controller.getAllPost // get all posts
   );

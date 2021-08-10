@@ -62,6 +62,16 @@ class BlogServices {
         });
     }
 
+    getPostById(id){
+      return axios
+      .get(apiurl +"/id",
+      {params:{ id:id} }
+      )
+      .then(response => { 
+        return response.data;
+      });
+  }
+
 }
 
 export default new BlogServices();
