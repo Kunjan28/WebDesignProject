@@ -25,6 +25,7 @@ class Map extends React.Component {
 			placeData: [],
 			search: "", clippedSearch: "Hawaii"
 		}
+		this.divmap=React.createRef()
 	}
 
 	// To load initial data
@@ -88,6 +89,12 @@ class Map extends React.Component {
 		this.setState({ clippedSearch: this.state.search })
 		console.log('Csearch' + this.state.clippedSearch)
 		this.fetchCoordinatesByPlace(this.state.search);
+		if(this.divmap.current){
+            this.divmap.current.scrollIntoView({ 
+               behavior: "smooth", 
+               block: "nearest"
+            })
+        }
 	}
 
 	fetchCoordinatesByPlace = (placeName) => {
@@ -160,6 +167,7 @@ class Map extends React.Component {
 							value={this.state.city}
 							onInput={this.onChange}
 						/>
+						
 						<Button style={{ backgroundColor:'#00293c', width: '15%'}} variant="outline-primary" active onClick={this.onSubmit}>
 							Search
 						</Button>
@@ -169,7 +177,7 @@ class Map extends React.Component {
 
 
 				{/* Map with desc */}
-				<div style={{ backgroundColor: `#00293c` }}>
+				<div ref={this.divmap} style={{ backgroundColor: `#00293c` }}>
 					<div className="row">
 
 						<div class="col-md-5" style={{ margin: '1%' }} >
