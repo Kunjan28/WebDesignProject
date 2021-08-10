@@ -196,16 +196,7 @@ class Map extends React.Component {
 					</Row>
 
 				</div>
-				<div>
-					{this.state.placeData.map(place =>
-
-						<div className="row">
-							{place.name}
-						</div>
-
-
-					)}
-				</div>
+				
 				<div>
 
 					<Container>
