@@ -152,7 +152,7 @@ class Map extends React.Component {
 				{/* Image with Searchbar */}
 				<div style={{ backgroundImage: `url(${travelImg})`, backgroundSize:'cover',width: `100%`, height: `700px` }}>
 
-					<InputGroup style={{ maxWidth: `80%`, height:'33%', paddingTop:'7%', paddingLeft:'20%' }}>
+					<InputGroup style={{ maxWidth: `80%`, height:'25%', paddingTop:'7%', paddingLeft:'20%' }}>
 						<FormControl
 							placeholder="Enter place you want to visit and click Search"
 							aria-label="Recipient's username"
@@ -187,7 +187,7 @@ class Map extends React.Component {
 							/>
 						</div>
 						<div class="col-md-5">
-							<p style={{ color: `white`, fontSize: '100px', fontFamily: `cursive`, textAlign: `center`, paddingTop: `80px` }}>
+							<p style={{ color: `white`, fontSize: '70px', fontFamily: `cursive`, textAlign: `center`, paddingTop: `80px` }}>
 								Great Choice..!! Let's Explore {this.state.clippedSearch} :)
 							</p>
 
