@@ -6,6 +6,7 @@ import { HashRouter, Route } from "react-router-dom";
 import BlogByUser from "./BlogByUser";
 import BlogServices from '../services/blogs.services';
 import './blogsWrite.scss'
+import Advertisements from "./Advertisements";
 
 class Blog extends Component{
     
@@ -148,8 +149,10 @@ class Blog extends Component{
                         <BlogByUser userName={this.state.userName}/>
                     </Col>
                     <Col xs={12} md={3}>
-                        <div>
-                            space for advertisements
+                        <div className='ads-ads'>
+                            <Advertisements />
+                            <Advertisements />
+                            <Advertisements />
                         </div>
                     </Col>
 
