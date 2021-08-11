@@ -50,3 +50,31 @@
 .blog-form {
     background-color: #e0e8f0 !important;
 }
+
+.ads-ads{
+    padding-top: 75px;
+}
+
+.adv-main{
+    background-color: #00293c;
+    margin-bottom: 20px !important;
+}
+
+.adv-title{
+    color: #e0e8f0;
+}
+
+.adv-heading{
+    color: #e0e8f0;
+    border-top: 1px solid #e0e8f0;
+    padding-top: 10px ;
+}
+
+.adv-link{
+    color:#d2e5f8;
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+        color: #e0e8f0;
+    }
+}

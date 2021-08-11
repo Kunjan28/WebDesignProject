@@ -18,8 +18,8 @@ const TopNav = () => {
   return (
     <Navbar className='navbar-main sticky-top' bg="light" expand="lg">
         {!localStorage.getItem('user') ?
-          <Navbar.Brand className='navbar-title' href='/'>Welcome Guest!</Navbar.Brand> :
-          <Navbar.Brand className='navbar-title' href='/'>Welcome {JSON.parse(localStorage.getItem("user")).firstName}!</Navbar.Brand>}
+          <Navbar.Brand style={{'padding-left':'50px'}} className='navbar-title' href='/'>Welcome Guest!</Navbar.Brand> :
+          <Navbar.Brand style={{'padding-left':'50px'}} className='navbar-title' href='/'>Welcome {JSON.parse(localStorage.getItem("user")).firstName}!</Navbar.Brand>}
       
 					{/* <Navbar.Brand href="#">Some Title</Navbar.Brand> */}
 					<Navbar.Toggle aria-controls="navbar-bar-bar" className="nav-toggle" />

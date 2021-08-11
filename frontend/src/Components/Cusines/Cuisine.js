@@ -61,7 +61,9 @@ class Cuisine extends Component {
             <div className="Cusines">
                 <Row ref={this.scrollRef} className="rows">
                     <Col className="columns" md={8}>
-                        <h1>Nearby Restaurants</h1>
+                        {this.state.restaurants.length > 0 ?
+                            <h1>Nearby Restaurants</h1> :
+                            <p></p>}
                         {this.state.restaurants
                             .slice(this.state.pagesVisited, (this.state.pagesVisited + this.state.usersPerPage))
                             .map((res, index) => {
@@ -102,7 +104,9 @@ class Cuisine extends Component {
                     </Col>
 
                     <Col className="columns" lg={4}>
-                        <h1> Related Blogs</h1>
+                        {this.state.restaurants.length > 0 ?
+                            <h1> Related Blogs</h1> :
+                            <p></p>}
                         {this.state.recipes.map((recipe, index) => {
                             return <div key={index} className="recipe"><Card style={{ width: '100%' }}>
                                 <Card.Img variant="top" src="holder.js/100px180" src={recipe.image} />

@@ -147,6 +147,7 @@ export default class LoginModal extends Component {
             <div className="text-center pt-3">
               <span className="text-center pt-3">
                 Not yet registered?
+                &nbsp;&nbsp;
                 <Link to="/Signup">Sign up</Link>
               </span>
             </div>
