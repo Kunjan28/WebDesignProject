@@ -5,6 +5,7 @@ import { Container, Row, Image, Carousel, Col, Form,Button, Dropdown } from "rea
 import { HashRouter, Route } from "react-router-dom";
 import BlogByUser from "./BlogByUser";
 import BlogServices from '../services/blogs.services';
+import './blogsWrite.scss'
 
 class Blog extends Component{
     
@@ -32,8 +33,12 @@ class Blog extends Component{
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = today.getFullYear();
             today = mm + '/' + dd + '/' + yyyy;
+            var tag_new=''
+            this.state.postTag === 'Select Tag'
+            ? tag_new = 'Miscellaneous'
+            : tag_new= this.state.postTag
             BlogServices.addPost(
-                this.state.postTag,
+                tag_new,
                 this.state.heading,
                 this.state.content,
                 today,
@@ -65,59 +70,82 @@ class Blog extends Component{
                     </h2>
                 </Row>
                 <Row>
-                    <Form onSubmit={formSubmit}>
+                    <Col xs={12} md={1} className="dummy">
+                    Stuff
+                    </Col>
+                    <Col xs={8} md={8}>
+                        <Form.Label>Write something</Form.Label>
+                    </Col>
+                    <Col xs={3} md={3}>
+                    <Dropdown className="d-flex justify-content-center">
+                              <Dropdown.Toggle className='dropdown-tag' variant="success" id="dropdown-basic" >
+                                {this.state.postTag}
+                              </Dropdown.Toggle>
+            
+                              <Dropdown.Menu>
+                                  {this.state.tagsList.map((tag)=>(
+                                      <Dropdown.Item className='dropdown-item-tag' 
+                                      onClick={(e)=>{this.setState({postTag:tag})}} 
+                                      key={tag}>{tag}</Dropdown.Item>
+                                  ))}
+                              </Dropdown.Menu>
+                            </Dropdown>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} md={1} className="dummy">
+                        Stuff
+                    </Col>
+                    <Col xs={12} md={8}>
+                        <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Write something</Form.Label>
-                            <Form.Control
-                            as="textarea" rows={1} 
-                            onClick={(e)=>{this.setState({heading:''})}}
+                        <Form.Control
+                            as="textarea" rows={1}
                             placeholder='Title of the blog'
                             value={this.state.heading}
                             onChange={(e)=> {this.setState({heading:e.target.value})}}
                             />
                         </Form.Group>
+                        </Form>
+                    </Col>
+                    <Col xs={12} md={3} className="dummy">
+                        Stuff
+                    </Col>
+                </Row>
+                <Row className="last-row">
+                    <Col xs={12} md={1} className="dummy">
+                    Stuff
+                    </Col>
+                    <Col xs={12} md={8}>
+                    <Form onSubmit={formSubmit}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea2">
                             <Form.Control as="textarea" 
                             rows={this.state.rowLength}
                             placeholder='Content goes here'
                             value={this.state.content}
-                            onClick={(e)=>{this.setState({rowLength:10, content:''})}} 
+                            onClick={(e)=>{this.setState({rowLength:10})}} 
                             onChange={(e)=> {this.setState({content:e.target.value})}}/>
                         </Form.Group>
-                        <Dropdown className="d-flex justify-content-end">
-                          <Dropdown.Toggle variant="success" id="dropdown-basic" >
-                            {this.state.postTag}
-                          </Dropdown.Toggle>
-
-                          <Dropdown.Menu>
-                              {this.state.tagsList.map((tag)=>(
-                                  <Dropdown.Item onClick={(e)=>{this.setState({postTag:tag})}} key={tag}>{tag}</Dropdown.Item>
-                              ))}
-                          </Dropdown.Menu>
-                        </Dropdown>
-                        <Button variant="primary" type="submit">
-                        Submit
-                      </Button>
+                        {
+                            this.state.heading !== '' && this.state.content !==''
+                            ?<Button className="btn-post" variant="primary" type="submit">Post</Button>
+                            :<Button className="btn-post" variant="primary" type="submit" disabled>Post</Button>
+                        }
                     </Form>
+                    </Col >
+                    
+                    <Col xs={12} md={3}className="dummy">
+                    Stuff
+                    </Col>
                 </Row>
                 <Row>
-                    <Col md={2}>
-                        <Navbar>
-                            <Nav className="flex-column">
-                                {
-                                    this.state.tagsList.map((tag)=>{
-                                        const lnk = 'blog/'+tag;
-                                        return <Nav.Link key={tag} onClick={(e)=> this.setState({selectedTag:tag})} >{tag}</Nav.Link>
-                                        
-                                    })
-                                }
-                            </Nav>
-                        </Navbar>
+                    <Col xs={12} md={1} className='dummy'>
+                        stuff
                     </Col>
-                    <Col md={7}>
+                    <Col xs={12} md={8} className="user-blogs">
                         <BlogByUser userName={this.state.userName}/>
                     </Col>
-                    <Col>
+                    <Col xs={12} md={3}>
                         <div>
                             space for advertisements
                         </div>
