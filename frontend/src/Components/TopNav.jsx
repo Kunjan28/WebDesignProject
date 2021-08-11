@@ -18,10 +18,8 @@ const logout = () => {
 const TopNav = () => {
   return (
     <Navbar className='navbar-main sticky-top' bg="light" expand="lg">
-        {!localStorage.getItem('user') ?
-          <Navbar.Brand style={{'padding-left':'50px'}} className='navbar-title' href='/'>Welcome Guest!</Navbar.Brand> :
-          <Navbar.Brand style={{'padding-left':'50px'}} className='navbar-title' href='/'>Welcome {JSON.parse(localStorage.getItem("user")).firstName}!</Navbar.Brand>}
-      
+       <Navbar.Brand style={{'padding-right':'50px',marginRight:`50px`,fontFamily:`cursive`}} className='navbar-title'href='/' >&nbsp; Food-Travel-Blog</Navbar.Brand>
+       
 					{/* <Navbar.Brand href="#">Some Title</Navbar.Brand> */}
 					<Navbar.Toggle aria-controls="navbar-bar-bar" className="nav-toggle" />
 					<Navbar.Collapse id="navbar-bar-bar" >
@@ -53,6 +51,10 @@ const TopNav = () => {
 
 					  </Nav>
 					</Navbar.Collapse>
+          {!localStorage.getItem('user') ?
+          <Navbar.Brand style={{'padding-right':'50px'}} className='navbar-title' href='/'>&nbsp;Welcome Guest!</Navbar.Brand> :
+          <Navbar.Brand style={{'padding-right':'50px'}} className='navbar-title' href='/'>&nbsp;Welcome {JSON.parse(localStorage.getItem("user")).firstName}!</Navbar.Brand>}
+      
 				</Navbar>
   );
 };
