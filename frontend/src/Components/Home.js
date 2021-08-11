@@ -46,9 +46,9 @@ class Home extends Component{
                 <Row>
                     <Col lg={2} md={3} sm={12}>
                         <Navbar expand='md'>
-                        <Navbar.Toggle aria-controls="tagScroll" >View Tags</Navbar.Toggle>
+                        <Navbar.Toggle style={{backgroundColor:'#00293c', color:'#e0e8f0'}} aria-controls="tagScroll" >View Tags</Navbar.Toggle>
                         <Navbar.Collapse id="tagScroll" >
-                            <Nav>
+                            <Nav navbarScroll>
                                 <ListGroup className="my-2" vertical>
                                 {
                                     this.state.tagsList.map((tag)=>{

@@ -1,7 +1,7 @@
 import React from 'react';
 import './TopNav.scss';
 
-import { Container, Nav, Navbar, Form , FormControl, Button, NavDropdown} from 'react-bootstrap';
+import { Container, Nav, Navbar, Form , FormControl, Button, NavDropdown, Col} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 import AuthService from "../services/auth.services";
@@ -21,8 +21,9 @@ const TopNav = () => {
        <Navbar.Brand style={{'padding-right':'50px',marginRight:`50px`,fontFamily:`cursive`}} className='navbar-title'href='/' >&nbsp; Food-Travel-Blog</Navbar.Brand>
        
 					{/* <Navbar.Brand href="#">Some Title</Navbar.Brand> */}
-					<Navbar.Toggle aria-controls="navbar-bar-bar" className="nav-toggle" />
+					<Navbar.Toggle style={{marginRight:'20px'}} aria-controls="navbar-bar-bar" className="nav-toggle" />
 					<Navbar.Collapse id="navbar-bar-bar" >
+            <Col>
 					  <Nav
 					    className="mr-auto my-2 my-lg-0 navbar-nav-part"
 					    style={{ maxHeight: '100px' }}
@@ -37,8 +38,12 @@ const TopNav = () => {
 							? <Nav.Link activeClassName="active" as={NavLink} to='/myblogs' className='navbar-text' href="#myblogs" disabled>Write Blog</Nav.Link>
 							: <Nav.Link activeClassName="active" as={NavLink} to='/myblogs' className='navbar-text' href="#myblogs">Write Blog</Nav.Link>
 						}
+            </Nav>
+            </Col>
+            <Col lg={3} className="d-flex justify-content-center">
+            <Nav>
                         {!localStorage.getItem('user') ?
-              <Nav.Link to="/signup" activeClassName='active' exact as={NavLink} to='/signup'  href="#signup"className="button_sign navbar-text"><li>
+              <Nav.Link to="/signup" activeClassName='active' exact as={NavLink} to='/signup'  href="#signup"className="button_sign navbar-text "><li>
                 Sign Up
                 </li></Nav.Link> : null}
             {!localStorage.getItem('user') ?
@@ -48,12 +53,13 @@ const TopNav = () => {
               <Nav.Link to="/" onClick={logout} exact as={NavLink}  href="#logout"  className="button_sign navbar-text"><li>
                 Logout
                 </li></Nav.Link>}
-
-					  </Nav>
+            </Nav>
+            </Col>
+					  
 					</Navbar.Collapse>
-          {!localStorage.getItem('user') ?
+          {/* {!localStorage.getItem('user') ?
           <Navbar.Brand style={{'padding-right':'50px'}} className='navbar-title' href='/'>&nbsp;Welcome Guest!</Navbar.Brand> :
-          <Navbar.Brand style={{'padding-right':'50px'}} className='navbar-title' href='/'>&nbsp;Welcome {JSON.parse(localStorage.getItem("user")).firstName}!</Navbar.Brand>}
+          <Navbar.Brand style={{'padding-right':'50px'}} className='navbar-title' href='/'>&nbsp;Welcome {JSON.parse(localStorage.getItem("user")).firstName}!</Navbar.Brand>} */}
       
 				</Navbar>
   );
