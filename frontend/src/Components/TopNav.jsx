@@ -18,7 +18,7 @@ const logout = () => {
 const TopNav = () => {
   return (
     <Navbar className='navbar-main sticky-top' bg="light" expand="lg">
-       <Navbar.Brand style={{'padding-right':'50px',marginRight:`50px`,fontFamily:`cursive`}} className='navbar-title'href='/' >&nbsp; Food-Travel-Blog</Navbar.Brand>
+       <Navbar.Brand style={{'padding-right':'50px',marginRight:`50px`,fontFamily:`cursive`}} className='navbar-title'href='/' >&nbsp; OneStopWander</Navbar.Brand>
        
 					{/* <Navbar.Brand href="#">Some Title</Navbar.Brand> */}
 					<Navbar.Toggle style={{marginRight:'20px'}} aria-controls="navbar-bar-bar" className="nav-toggle" />
