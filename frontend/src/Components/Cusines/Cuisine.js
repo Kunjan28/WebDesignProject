@@ -62,7 +62,7 @@ class Cuisine extends Component {
                 <Row ref={this.scrollRef} className="rows">
                     <Col className="columns" md={8}>
                         {this.state.restaurants.length > 0 ?
-                            <h1>Nearby Restaurants</h1> :
+                            <h1>Nearby {this.props.cuisine} Restaurants</h1> :
                             <p></p>}
                         {this.state.restaurants
                             .slice(this.state.pagesVisited, (this.state.pagesVisited + this.state.usersPerPage))
