@@ -25,7 +25,7 @@ class Advertisements extends Component{
                 title: 'Traverse City Tourism',
                 heading: 'Cherry Blossom season in Traverse City is just around the corner!',
                 imageUrl: 'images/traverse.png',
-                imageText: 'When and where does it all haooen?',
+                imageText: 'When and where does it all happen?',
                 websiteLink: 'https://www.traversecity.com/'
             },
             {
