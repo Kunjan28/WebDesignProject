@@ -299,7 +299,7 @@ export default class SignUpModal extends Component {
         </Row>
         {this.state.message && (
           <div className="form-group">
-            <div
+            <div style={{'background-color':'#212529','color':'#fff'}}
               className={
                 this.state.successful
                   ? "alert alert-success"
