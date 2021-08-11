@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import { Container, Row, Image, Carousel, Col } from "react-bootstrap";
-import { GoogleMap, InfoWindow, Marker, withGoogleMap, withScriptjs } from "react-google-maps"
 import Geocode from "react-geocode";
 import Map from './Map'
 import Place from './Place'
-import img1 from './travelImg1.jfif';
-import img2 from './travelImg2.png';
-import img3 from './travelImg3.jfif';
+
 Geocode.setApiKey('AIzaSyBJd54lkWdNgrJVYKp4Oqr2YUSkfScT5Rg');
 
 Geocode.enableDebug();

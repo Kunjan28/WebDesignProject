@@ -2,9 +2,8 @@ import React from 'react';
 import PlaceCard from './PlaceCard';
 import { Button, InputGroup, FormControl, Container } from "react-bootstrap";
 import { GoogleMap, InfoWindow, Marker, withGoogleMap, withScriptjs } from "react-google-maps"
-import SearchBox from 'react-google-maps/lib/components/places/SearchBox';
 import travelImg from './136008.jpg';
-
+import travelGif from './earth.gif';
 
 class Map extends React.Component {
 
@@ -168,7 +167,7 @@ class Map extends React.Component {
 							onInput={this.onChange}
 						/>
 						
-						<Button style={{ backgroundColor:'#00293c'}} variant="outline-primary" active onClick={this.onSubmit}>
+						<Button style={{backgroundColor:`#04060F`}} size="lg"  variant="outline-primary" active onClick={this.onSubmit}>
 							Search
 						</Button>
 					</InputGroup>
@@ -177,7 +176,7 @@ class Map extends React.Component {
 
 
 				{/* Map with desc */}
-				<div ref={this.divmap} style={{ backgroundColor: `#00293c` }}>
+				<div ref={this.divmap} style={{ backgroundImage: `url(${travelGif})`}} >
 					<div className="row">
 
 						<div class="col-md-5" style={{ margin: '1%' }} >
@@ -195,8 +194,8 @@ class Map extends React.Component {
 							/>
 						</div>
 						<div class="col-md-5">
-							<p style={{ color: `white`, fontSize: '70px', fontFamily: `cursive`, textAlign: `center`, paddingTop: `80px` }}>
-								Great Choice..!! Let's Explore {this.state.clippedSearch} :)
+							<p style={{ color: `white`, fontSize: '80px', fontFamily: `cursive`, textAlign: `center`, paddingTop: `80px` }}>
+								Let's Explore {this.state.clippedSearch} :))
 							</p>
 
 						</div>
