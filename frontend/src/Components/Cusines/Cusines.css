@@ -1,41 +1,28 @@
-
-.recipe{
-    background-color: #bedbe9;
-    max-width: 100%;
-}
-
 body {
-            border: none;
-            background-color:lightsteelblue;
-           
+   border: none;
+   background-color:lightsteelblue;        
 }
 
 .dropdown-menu {
-    background-color:lightsteelblue;
-    
+    background-color:lightsteelblue; 
 }
 
 .dropdown.dropdown-menu {
-    background-color: #e0e8f0;
-    
+    background-color: #e0e8f0;   
 }
 
 .Cusines {
     border: none;
     max-width: 100%;
-    border-radius: 12px;
-    background-color: lightsteelblue;
-    
+    border-radius: 12px;      
 }
 
 .btn-primary{
-    background-color: #d0deec !important;
-    color: #00293c !important;
+    background-color: lightsteelblue ;
     border: none;
     text-align: left;
   }
 
-.restaurant{
-    background-color:lightsteelblue;
+.btn-primary:hover{
+    opacity: 1;
 }
-
