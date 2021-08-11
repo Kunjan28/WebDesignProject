@@ -6,7 +6,7 @@ import ReactPaginate from "react-paginate";
 
 const DOCUMENU_API_KEY = "cff91f44c684a03c1b4d509c5085c946";
 //const SPOONACULAR_API_KEY = "35e286a7691b4428a225021312a7b9de";
-const SPOONACULAR_API_KEY ="adef6fa141fa432796e6d6a8aaa8d63b";
+const SPOONACULAR_API_KEY = "adef6fa141fa432796e6d6a8aaa8d63b";
 
 class Cuisine extends Component {
 
@@ -16,12 +16,12 @@ class Cuisine extends Component {
             restaurants: [],
             recipes: [],
             pageNumber: 0,
-            pageCount:0,
+            pageCount: 0,
             usersPerPage: 5,
             pagesVisited: 0
         }
 
-        this.scrollRef = React.createRef()  
+        this.scrollRef = React.createRef()
     }
 
 
@@ -40,8 +40,8 @@ class Cuisine extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         console.log(prevState, this.state)
-        if(prevState.pageNumber !== this.state.pageNumber){
-            let newPagesVisited = this.state.usersPerPage*this.state.pageNumber;
+        if (prevState.pageNumber !== this.state.pageNumber) {
+            let newPagesVisited = this.state.usersPerPage * this.state.pageNumber;
             console.log(newPagesVisited)
             this.setState({ pagesVisited: newPagesVisited });
         }
@@ -54,7 +54,7 @@ class Cuisine extends Component {
     changePage = ({ selected }) => {
         // console.log(selected)
         this.setState({ "pageNumber": selected });
-        this.scrollRef.current.scrollIntoView(); 
+        this.scrollRef.current.scrollIntoView();
     }
 
     render(props) {
@@ -62,7 +62,9 @@ class Cuisine extends Component {
             <div className="Cusines">
                 <Row ref={this.scrollRef} className="rows">
                     <Col className="columns" md={8}>
-                        <h1>Nearby Restaurants</h1>
+                        {this.state.restaurants.length > 0 ?
+                            <h1>Nearby Restaurants</h1> :
+                            <p></p>}
                         {this.state.restaurants
                             .slice(this.state.pagesVisited, (this.state.pagesVisited + this.state.usersPerPage))
                             .map((res, index) => {
@@ -86,8 +88,8 @@ class Cuisine extends Component {
                                 </div>
                             })}
                         <br></br>
-                        
-                        {this.state.restaurants.length > 0?<ReactPaginate
+
+                        {this.state.restaurants.length > 0 ? <ReactPaginate
                             previousLabel={"Previous"}
                             nextLabel={"Next"}
                             pageCount={(Math.ceil((this.state.restaurants.length) / this.usersPerPage))}
@@ -98,12 +100,14 @@ class Cuisine extends Component {
                             nextLinkClassName={"nextBtn"}
                             disabledClassName={"paginationDisabled"}
                             activeClassName={"paginationActive"}
-                        />:""}
+                        /> : ""}
 
                     </Col>
 
                     <Col className="columns" lg={4}>
-                        <h1> Related Blogs</h1>
+                        {this.state.restaurants.length > 0 ?
+                            <h1> Related Blogs</h1> :
+                            <p></p>}
                         {this.state.recipes.map((recipe, index) => {
                             return <div key={index} className="recipe"><Card style={{ width: '100%' }}>
                                 <Card.Img variant="top" src="holder.js/100px180" src={recipe.image} />
