@@ -289,6 +289,7 @@ export default class SignUpModal extends Component {
             <div className="text-center pt-3">
               <span className="text-center pt-3">
                 Already have an account?
+                &nbsp;
                 <Link to="/login"> Log in</Link>
               </span>
             </div>
