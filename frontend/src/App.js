@@ -64,9 +64,9 @@ class App extends Component{
 				<Route path ='/food' component={Food} />
                 <Route path ='/blog' component={Home} />
 				<Route path ='/myblogs' component={ (props) => <Blog credentials= {this.state.credentials} blogs={this.state.blogs} writeBlog = {(details)=>this.writeBlog(details)}/>} />				
-				<Route exact path="/login" component={LoginModal} />
-                <Route path="/signup" component={SignUpModal} />
-                <Route exact path="/post/:id" component={BlogId} />
+                <Route exact path="/signup" component={SignUpModal} />
+                <Route exact path="/login" component={LoginModal} />
+                <Route  path="/post/:id" component={BlogId} />
              
                 <SocialMedia />
           <Footer />

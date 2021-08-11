@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, Row, Col, Container, Button, Form } from "react-bootstrap";
 import AuthService from "../services/auth.services";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import Login from "./LoginModal";
 import SignUp from "./SignUpModal";
 import "./form.css"
@@ -291,7 +291,7 @@ export default class SignUpModal extends Component {
               <span className="text-center pt-3">
                 Already have an account?
                 &nbsp;
-                <Link to="/login"> Log in</Link>
+                <NavLink exact as={NavLink} to='/login' href='#login'> Log in</NavLink>
               </span>
             </div><br></br>
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Modal, Row, Col, Container, Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 
 import AuthService from "../services/auth.services";
 export default class LoginModal extends Component {
@@ -71,7 +71,7 @@ export default class LoginModal extends Component {
     let emailIdError = "";
     let passwordError = "";
     var emailRegex = /([\w\.]+)@([\w\.]+)\.(\w+)/;
-    var passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+    var passwordRegex = /^[A-Za-z]\w{7,14}$/;
 
     switch (name) {
       case "emailId":
@@ -109,12 +109,8 @@ export default class LoginModal extends Component {
 
 
       <Container id="container" style={{ 'minHeight': '100vh' }}>
-
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
         <Row>
+
           <div className="text-center pt-3 h1">
             Log In!!
           </div>
@@ -152,7 +148,7 @@ export default class LoginModal extends Component {
               <span className="text-center pt-3">
                 Not yet registered?
                 &nbsp;&nbsp;
-                <Link to="/Signup">Sign up</Link>
+                <NavLink exact as={NavLink} to='/signup' href='#signup'> Sign Up</NavLink>
               </span>
             </div>
 

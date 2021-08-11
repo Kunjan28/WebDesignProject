@@ -1,4 +1,5 @@
 import React from 'react';
+import './TopNav.scss';
 
 import { Container, Nav, Navbar, Form , FormControl, Button, NavDropdown} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
@@ -29,24 +30,24 @@ const TopNav = () => {
 					    style={{ maxHeight: '100px' }}
 					    navbarScroll
 					  >
-					    <Nav.Link activeClassName="active" className='navbar-text' href="#home">Home</Nav.Link>
-              <Nav.Link activeClassName="active" className='navbar-text' href="#food">Food</Nav.Link>
-					    <Nav.Link activeClassName="active" className='navbar-text' href="#travel">Travel</Nav.Link>
-              <Nav.Link activeClassName="active" className='navbar-text' href="#blog">Blog</Nav.Link>
+					    <Nav.Link activeClassName="active" exact as={NavLink} to='/' className='navbar-text' href="#home">Home</Nav.Link>
+              <Nav.Link activeClassName="active" as={NavLink} to='/food' className='navbar-text' href="#food">Food</Nav.Link>
+					    <Nav.Link activeClassName="active" as={NavLink} to='/travel' className='navbar-text' href="#travel">Travel</Nav.Link>
+              <Nav.Link activeClassName="active" as={NavLink} to='/blog' className='navbar-text' href="#blog">Blog</Nav.Link>
 						{
 							localStorage.getItem('user') === null
-							? <Nav.Link activeClassName="active" className='navbar-text' href="#myblogs" disabled>Write Blog</Nav.Link>
-							: <Nav.Link activeClassName="active" className='navbar-text' href="#myblogs">Write Blog</Nav.Link>
+							? <Nav.Link activeClassName="active" as={NavLink} to='/myblogs' className='navbar-text' href="#myblogs" disabled>Write Blog</Nav.Link>
+							: <Nav.Link activeClassName="active" as={NavLink} to='/myblogs' className='navbar-text' href="#myblogs">Write Blog</Nav.Link>
 						}
                         {!localStorage.getItem('user') ?
-              <Nav.Link to="/signup" activeClassName='active' as={NavLink} className="button_sign navbar-text"><li>
+              <Nav.Link to="/signup" activeClassName='active' exact as={NavLink} to='/signup'  href="#signup"className="button_sign navbar-text"><li>
                 Sign Up
                 </li></Nav.Link> : null}
             {!localStorage.getItem('user') ?
-              <Nav.Link to="/login" activeClassName='active' as={NavLink} className="button_sign navbar-text"><li>
+              <Nav.Link to="/login" activeClassName='active' eaxct as={NavLink} to='/login' href="#login" className="button_sign navbar-text"><li>
                 Login
                 </li></Nav.Link> :
-              <Nav.Link to="/" onClick={logout} as={NavLink} className="button_sign navbar-text"><li>
+              <Nav.Link to="/" onClick={logout} exact as={NavLink}  href="#logout"  className="button_sign navbar-text"><li>
                 Logout
                 </li></Nav.Link>}
 
