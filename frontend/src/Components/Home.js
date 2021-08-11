@@ -77,7 +77,7 @@ class Home extends Component{
                         </Navbar.Collapse>
                         </Navbar>
                     </Col>
-                    <Col lg={7} md={9} sm={12}>
+                    <Col lg={7} md={9} sm={12} style={{marginTop:'10px'}}>
                     {console.log(this.state.currentUser)}
                         {
                             this.state.blogs.length === 0
@@ -87,7 +87,7 @@ class Home extends Component{
                         
                     </Col>
                     <Col>
-                    <div className='ads-ads'>
+                    <div style={{marginTop:'20px'}}>
                             <Advertisements />
                             <Advertisements />
                             <Advertisements />

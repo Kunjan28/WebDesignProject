@@ -86,12 +86,14 @@ class  BlogByUser extends Component{
                                 onClick={(e)=> {
                                     this.setState( (currentState) => ({
                                         blogs: currentState.blogs.map((c)=> {
+                                            if(c._id === post._id){
+                                            
                                             if(c.view==='View Less ↑'){
                                                 c.view='View More ↓'
                                             }
                                             else{
                                                 c.view='View Less ↑'
-                                            }
+                                            }}
                                             return c
                                         } )
                                     }))

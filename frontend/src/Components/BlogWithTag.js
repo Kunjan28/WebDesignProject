@@ -87,12 +87,14 @@ class  BlogWithTag extends Component{
                                 onClick={(e)=> {
                                     this.setState( (currentState) => ({
                                         blogs: currentState.blogs.map((c)=> {
+                                            if(c._id === post._id){
+                                            
                                             if(c.view==='View Less ↑'){
                                                 c.view='View More ↓'
                                             }
                                             else{
                                                 c.view='View Less ↑'
-                                            }
+                                            }}
                                             return c
                                         } )
                                     }))
@@ -153,7 +155,7 @@ class  BlogWithTag extends Component{
                                                 onChange={(e)=>{
                                                     this.setState( (currentState) => ({
                                                         blogs: currentState.blogs.map((c) =>{
-                                                            if(c.title === post.title) {
+                                                            if(c._id === post._id) {
                                                                 c.currentComment=e.target.value
                                                             }
                                                             return c
@@ -171,7 +173,7 @@ class  BlogWithTag extends Component{
                                                 })
                                                 this.setState((currentState) => ({
                                                     blogs: currentState.blogs.map((c) =>{
-                                                        if(c.title === post.title) {
+                                                        if(c._id === post._id) {
                                                             c.comments = c.comments.concat([{userName:c.userName, comment:c.currentComment}])
                                                             console.log(c.comments)
                                                             c.currentComment=''
