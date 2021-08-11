@@ -4,8 +4,8 @@ import "./Cusines.css";
 import ReactPaginate from "react-paginate";
 
 
-const DOCUMENU_API_KEY = "cff91f44c684a03c1b4d509c5085c946";
-const SPOONACULAR_API_KEY = "9644f3c958834411aa07e947c410b7b5";
+const DOCUMENU_API_KEY = "8bd90611f6aede9c5e4388278c80a250";
+const SPOONACULAR_API_KEY = "2b3a60a05f7d493d9bdd48f12eeee0b3";
 
 class Cuisine extends Component {
 
