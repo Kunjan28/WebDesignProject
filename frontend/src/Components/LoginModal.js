@@ -7,19 +7,17 @@ export default class LoginModal extends Component {
     super(props);
     console.log("InLogin Modal")
     this.handleLogin = this.handleLogin.bind(this);
-    //this.onChangeUsername = this.onChangeUsername.bind(this);
-    // this.onChangePassword = this.onChangePassword.bind(this);
-
     // state of login component
     this.state = {
       emailid: "",
       password: "",
       loading: false,
-      message: ""
+      message: "",
+
+      emailIdError: "",
+      passwordError: "",
     };
   }
-  //sets username
-
 
   handleLogin(e) {
     e.preventDefault();
@@ -31,9 +29,6 @@ export default class LoginModal extends Component {
 
     // method to check validation functions
 
-
-    // verifies if form validation is successful or not
-    //if (this.checkBtn.context._errors.length === 0) {
     AuthService.login(this.state.emailid, this.state.password).then(
       () => {
 
@@ -56,44 +51,83 @@ export default class LoginModal extends Component {
         });
       }
     );
-    // } else {
-    //   this.setState({
-    //     loading: false
-    //   });
-    // }
+  }
 
 
+  handleChange(e) {
+
+    e.preventDefault();
+    const { name, value } = e.target;
+    let password = this.state.password;
+    let email = this.state.emailId;
+    const isValid = this.validate(name, value, email, password);
+  };
+
+
+  validate(name, value, email, password) {
+   
+    let emailIdError = "";
+    let passwordError = "";
+    var emailRegex = /([\w\.]+)@([\w\.]+)\.(\w+)/;
+    var passwordRegex = /^[A-Za-z]\w{7,14}$/;
+
+    switch (name) {
+      case "emailId":
+        this.setState({ "emailid": value });
+        if (emailRegex.test(value)) {
+          emailIdError = ''
+          this.setState({ emailIdError });
+        } else {
+          emailIdError = 'Invalid Email'
+          this.setState({ emailIdError });
+        }
+        break;
+
+      case "password":
+        this.setState({ "password": value });
+        if (passwordRegex.test(value)) {
+          passwordError = ""
+          this.setState({ passwordError });
+
+        } else {
+          passwordError = "Password incorrect. Please try again."
+          this.setState({ passwordError });
+
+        }
+        break;
+      default:
+        break;
+    }
 
   }
+
+
   render() {
     return (<>
 
 
-      <Container id="container">
+      <Container id="container" style={{'minHeight':'100vh'}}>
         <Row>
           <Form className="login-form" onSubmit={this.handleLogin}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              {/* <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" onChange={(e) => { this.setState({ emailId: e.target.value }) }} /> */}
-
               <div className="form_1">
-                <input type="text" autoComplete="off" required name="emailId" onChange={(e) => { this.setState({ emailid: e.target.value }) }} />
+                <input type="text" autoComplete="off" required name="emailId"onChange={(e) => this.handleChange(e)} />
                 <label htmlFor="name" className="label-name">
                   <span className="content-name">Enter email* </span>
                 </label>
               </div>
+              <div className="form_error" style={{ fontSize: 15, color: "red" }}> {this.state.emailIdError}</div>
+
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              {/* <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" onChange={(e) => { this.setState({ password: e.target.value }) }} /> */}
-              <div className="form_1">
-                <input type="password" autoComplete="off" required name="password"  onChange={(e) => { this.setState({ password: e.target.value }) }} /> 
+             <div className="form_1">
+                <input type="password" autoComplete="off" required name="password"  onChange={(e) => this.handleChange(e)} /> 
                 <label htmlFor="name" className="label-name">
                   <span className="content-name">Enter password* </span>
                 </label>
               </div>
-
+              <div className="form_error"  style={{ fontSize: 15, color: "red" }}> {this.state.passwordError}</div>
             </Form.Group>
 
            <div className="text-center">
@@ -108,8 +142,6 @@ export default class LoginModal extends Component {
             <div className="text-center">
               <a href="/Signup">Sign up</a>
             </div>
-
-
           </Form>
         </Row>
         {this.state.message && (

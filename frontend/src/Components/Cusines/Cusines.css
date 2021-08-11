@@ -26,3 +26,52 @@ body {
 .btn-primary:hover{
     opacity: 1;
 }
+
+
+
+
+.paginationBttns {
+    width: 80%;
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .paginationBttns a {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .paginationBttns a:hover {
+    color: black;
+    background-color: gray;
+  }
+  
+  .paginationActive a {
+    color: black;
+    background-color: gray;
+  }
+  
+  .paginationDisabled a {
+    background-color: #cccccc;
+    color: #666666;
+    text-decoration: none;
+  }
+
+  .paginationDisabled a:hover {
+    background-color: #cccccc;
+    color: #666666;
+    text-decoration: none;
+  }
+
+  .customDiv{
+      float: left !important;
+      padding-top: 15px !important;
+  }
+

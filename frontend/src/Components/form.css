@@ -15,13 +15,24 @@
     overflow: hidden;
 }
 
+.form_error{
+    width:50%;
+    max-width: 330px;
+    padding: 5px;
+    margin: auto;
+    position: relative;
+}
+
 .form_1 input {
     width: 100%;
     height: 100%;
     color:#595f6e;
-    padding-top: 20px;
+    padding-top: 10px;
     border: none;
     outline:none;
+    margin-bottom: -3px;
+    float: left;
+    background: #d2e5f8;
 }
 .form_1 label {
     position: absolute;

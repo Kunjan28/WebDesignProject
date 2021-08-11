@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Container, Row, Image, Carousel, Col, Form, Dropdown, Card, Button, CardGroup } from "react-bootstrap";
+import { Container, Row, Image, Carousel, carousel, Col, Form, Dropdown, Card, Button, CardGroup } from "react-bootstrap";
 import Cuisine from "./Cusines/Cuisine";
+import "./Food";
+
 
 const SPOONACULAR_API_KEY = "adef6fa141fa432796e6d6a8aaa8d63b";
 
@@ -43,32 +45,129 @@ class Food extends Component {
     this.setState({ recipes: result.results });
   }
 
+  cuisineChange(e) {
+    e.preventDefault();
+    const { value } = e.target;
+    this.setState({ "selectValue": value })
+  }
+
   render() {
 
     return (
       <Container>
         <Row className="dropdown" >
-          <Dropdown className="d-flex justify-content-center" onSelect={this.handleDropdownChange}>
-            <Dropdown.Toggle variant="dark" id="dropdown-basic"  >
-              Select Cuisine
-            </Dropdown.Toggle>
+          <Carousel className="carouse" fade={true}>
+            <Carousel.Item interval={2000} >
+              <img
+                className="d-block w-100 h-50 d-inline-block"
+                src={process.env.PUBLIC_URL + '/car1.jpg'}
+                alt="First slide"
+              />
+              <Carousel.Caption>
+                <div className="closecc" >
+                <h2 >Italian</h2>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                </div>
+                <button className="btn btn-lg btn-secondary" value="italian" onClick={(e) => this.cuisineChange(e)} >
+                  Search Restaurants
+                </button>
+              </Carousel.Caption>
+            </Carousel.Item>
 
-            <Dropdown.Menu >
-              <Dropdown.Item eventKey="italian">Italian</Dropdown.Item>
-              <Dropdown.Item eventKey="mexican">Mexican</Dropdown.Item>
-              <Dropdown.Item eventKey="indian">Indian</Dropdown.Item>
-              <Dropdown.Item eventKey="korean">Korean</Dropdown.Item>
-              <Dropdown.Item eventKey="american">American</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-          <br></br>
+            <Carousel.Item interval={2000} >
+              <img
+                className="d-block w-100"
+                src={process.env.PUBLIC_URL + '/car2.jpg'}
+                alt="Second slide"
+              />
+              <Carousel.Caption>
+                <h3>Mexican</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <button className="btn btn-lg btn-secondary" value="mexican" onClick={(e) => this.cuisineChange(e)} >
+                Search Restaurants
+                </button>
+              </Carousel.Caption>
+            </Carousel.Item>
+
+            <Carousel.Item interval={2000}>
+              <a href="https://google.com/"></a>
+              <img
+                className="d-block w-100"
+                src={process.env.PUBLIC_URL + '/car3.jpg'}
+                alt="Second slide"
+              />
+              <Carousel.Caption>
+                <h3>Korean</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+                <button className="btn btn-lg btn-secondary" value="korean" onClick={(e) => this.cuisineChange(e)} >
+                Search Restaurants
+                </button>
+              </Carousel.Caption>
+            </Carousel.Item>
+
+
+            <Carousel.Item interval={2000}>
+              <img
+                className="d-block w-100"
+                src={process.env.PUBLIC_URL + '/car4.jpg'}
+                alt="fourth slide"
+              />
+              <Carousel.Caption>
+                <h3>Indian</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+                <button className="btn btn-lg btn-secondary" value="indian" onClick={(e) => this.cuisineChange(e)} >
+                Search Restaurants
+                </button>
+
+              </Carousel.Caption>
+            </Carousel.Item>
+
+            <Carousel.Item interval={2000}>
+              <img
+                className="d-block w-100"
+                src={process.env.PUBLIC_URL + '/car5.jpg'}
+                alt="fifth slide"
+              />
+              <Carousel.Caption>
+                <h3>American</h3>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+
+                <button className="btn btn-lg btn-secondary" value="american" onClick={(e) => this.cuisineChange(e)} >
+                Search Restaurants
+                </button>
+              </Carousel.Caption>
+            </Carousel.Item>
+          </Carousel>
         </Row>
 
         <br></br>
         <Cuisine cuisine={this.state.selectValue} lat={this.state.latitude} lon={this.state.longitude} />
 
+        <Row>
+          <div className="Food_recipe">
+            <Col className="columns">
+              {this.state.recipes.map((recipe) => {
+                return <div><Card className="Recipe_card" style={{ width: '100%' }} >
+                  <Card.Img variant="top" src="holder.js/100px180" src={recipe.image} />
+                  <Card.Body>
+                    <Card.Title>{recipe.title}</Card.Title>
+                    <Card.Text>
+                      {recipe.summary}
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer className="text-muted">
+                    <a className="btn btn-primary" href={recipe.sourceUrl} role="button" target="_blank">Visit website</a>
+                  </Card.Footer>
+                </Card>
+                  <br></br>
+                </div>
+              })}
+            </Col>
+          </div>
+        </Row>
       </Container>
-
     )
   }
 }
