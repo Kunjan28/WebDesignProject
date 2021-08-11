@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, Row, Col, Container, Button, Form } from "react-bootstrap";
+import {  Link } from "react-router-dom";
+
 import AuthService from "../services/auth.services";
 export default class LoginModal extends Component {
 
@@ -65,7 +67,7 @@ export default class LoginModal extends Component {
 
 
   validate(name, value, email, password) {
-   
+
     let emailIdError = "";
     let passwordError = "";
     var emailRegex = /([\w\.]+)@([\w\.]+)\.(\w+)/;
@@ -106,12 +108,19 @@ export default class LoginModal extends Component {
     return (<>
 
 
-      <Container id="container" style={{'minHeight':'100vh'}}>
+      <Container id="container" style={{ 'minHeight': '100vh' }}>
         <Row>
+
+          <div className="text-center pt-3 h1">
+            Log In!!
+          </div>
+          <div className="text-center pt-3">
+            Note : Fields marked with an asterisk(*) are mandatory
+          </div>
           <Form className="login-form" onSubmit={this.handleLogin}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <div className="form_1">
-                <input type="text" autoComplete="off" required name="emailId"onChange={(e) => this.handleChange(e)} />
+                <input type="text" autoComplete="off" required name="emailId" onChange={(e) => this.handleChange(e)} />
                 <label htmlFor="name" className="label-name">
                   <span className="content-name">Enter email* </span>
                 </label>
@@ -121,27 +130,27 @@ export default class LoginModal extends Component {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-             <div className="form_1">
-                <input type="password" autoComplete="off" required name="password"  onChange={(e) => this.handleChange(e)} /> 
+              <div className="form_1">
+                <input type="password" autoComplete="off" required name="password" onChange={(e) => this.handleChange(e)} />
                 <label htmlFor="name" className="label-name">
                   <span className="content-name">Enter password* </span>
                 </label>
               </div>
-              <div className="form_error"  style={{ fontSize: 15, color: "red" }}> {this.state.passwordError}</div>
+              <div className="form_error" style={{ fontSize: 15, color: "red" }}> {this.state.passwordError}</div>
             </Form.Group>
 
-           <div className="text-center">
-              <Button className="btn-md btn-dark btn-block " type="submit">
+            <div className="text-center">
+              <Button className="btn-md btn-primary btn-block " type="submit">
                 Submit
               </Button>&nbsp;&nbsp;
             </div>
-
             <div className="text-center pt-3">
-              Not yet registered?
+              <span className="text-center pt-3">
+                Not yet registered?
+                <Link to="/Signup">Sign up</Link>
+              </span>
             </div>
-            <div className="text-center">
-              <a href="/Signup">Sign up</a>
-            </div>
+
           </Form>
         </Row>
         {this.state.message && (

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Modal, Row, Col, Container, Button, Form } from "react-bootstrap";
 import AuthService from "../services/auth.services";
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Login from "./LoginModal";
+import SignUp from "./SignUpModal";
 import "./form.css"
 
 export default class SignUpModal extends Component {
@@ -106,7 +108,7 @@ export default class SignUpModal extends Component {
     let password2Error = "";
 
     var regExName = /^[a-zA-Z]+$/;
-    var regExUserName =/^[a-zA-Z0-9]+$/;
+    var regExUserName = /^[a-zA-Z0-9]+$/;
     var regExPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
     var emailRegex = /([\w\.]+)@([\w\.]+)\.(\w+)/;
     var passwordRegex = /^[A-Za-z]\w{7,14}$/;
@@ -199,7 +201,7 @@ export default class SignUpModal extends Component {
     return (
       <Container id="container">
         <Row>
-          <div className="text-center pt-3">
+          <div className="text-center pt-3 h1">
             Join Us!!
           </div>
           <div className="text-center pt-3">
@@ -235,7 +237,7 @@ export default class SignUpModal extends Component {
                 </label>
               </div>
 
-              <div  className="form_error" style={{ fontSize: 15, color: "red" }}> {this.state.userNameError}</div>
+              <div className="form_error" style={{ fontSize: 15, color: "red" }}> {this.state.userNameError}</div>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formPhoneNumber">
@@ -246,7 +248,7 @@ export default class SignUpModal extends Component {
                   <span className="content-name">Enter Phone number* </span>
                 </label>
               </div>
-              <div  className="form_error" style={{ fontSize: 15, color: "red" }}> {this.state.phoneNoError}</div>
+              <div className="form_error" style={{ fontSize: 15, color: "red" }}> {this.state.phoneNoError}</div>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -256,7 +258,7 @@ export default class SignUpModal extends Component {
                   <span className="content-name">Enter Email Id* </span>
                 </label>
               </div>
-              <div  className="form_error" style={{ fontSize: 15, color: "red" }}> {this.state.emailIdError}</div>
+              <div className="form_error" style={{ fontSize: 15, color: "red" }}> {this.state.emailIdError}</div>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -280,16 +282,17 @@ export default class SignUpModal extends Component {
 
             </Form.Group>
             <div className="text-center">
-              <Button className="btn-md btn-dark btn-block " type="submit">
+              <Button className="btn-md btn-primary btn-block " type="submit">
                 Submit
               </Button>&nbsp;&nbsp;
             </div>
             <div className="text-center pt-3">
-              Already have an account?
+              <span className="text-center pt-3">
+                Already have an account?
+                <Link to="/login"> Log in</Link>
+              </span>
             </div>
-            <div className="text-center">
-              <a href="/Login">Login</a>
-            </div>
+
           </Form>
         </Row>
         {this.state.message && (
