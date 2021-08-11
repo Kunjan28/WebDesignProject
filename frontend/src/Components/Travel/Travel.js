@@ -35,7 +35,7 @@ class Travel extends Component {
 
     return (
   
-          <div>
+          <div style={{ 'minHeight': '100vh' }}>
             <Map handleFormSubmit={this.handleSubmit} />
            
           </div>

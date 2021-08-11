@@ -36,7 +36,7 @@ class  BlogWithTag extends Component{
     render(){
         console.log(this.state)
         return(
-            <div key={this.props.tag}>
+            <div key={this.props.tag} style={{ 'minHeight': '100vh' }}>
                 <h1>
                 
                     {
@@ -104,7 +104,7 @@ class  BlogWithTag extends Component{
                                 <Card.Footer className='blog-card-footer'>
                                 <Button 
                                 className='btn-sm btn-comment'
-                                style={localStorage.getItem("user")=== null? {display:'none'}:{display:'block'}}
+                              
                                 onClick={
                                     (e) => {
                                         this.setState( (currentState) => ({
@@ -144,7 +144,7 @@ class  BlogWithTag extends Component{
                                         })
                                     }
                                         <Form className='form-tag'>
-                                            <Form.Group className="mb-3" controlId="formFirstName">
+                                            <Form.Group className="mb-3" controlId="formFirstName"   style={localStorage.getItem("user")=== null? {display:'none'}:{display:'block'}}>
                                                 <Form.Control 
                                                 className='form-comment'
                                                 type="text" 
@@ -161,7 +161,7 @@ class  BlogWithTag extends Component{
                                                     }))
                                                 }} />
                                             </Form.Group>
-                                            <Button
+                                            <Button   style={localStorage.getItem("user")=== null? {display:'none'}:{display:'block'}}
                                             className='btn-sm btn-reply'
                                             onClick = {(e)=>{
                                                 BlogServices.addPostComment(post._id, this.props.userName,post.currentComment).then( () =>{
@@ -185,10 +185,10 @@ class  BlogWithTag extends Component{
                                 </ListGroup>
 
                                     < FacebookShareButton className='footer-icon' url={'http://localhost:3000/#/post/'+post._id}>
-                                      <FacebookIcon logoFillColor="white" size ={33} round/>
+                                      <FacebookIcon size ={33} round/>
                                         </FacebookShareButton>
                                         < LinkedinShareButton className='footer-icon' url={'http://localhost:3000/#/post/'+post._id}>
-                                      <LinkedinIcon logoFillColor="white" size ={33} round/>
+                                      <LinkedinIcon  size ={33} round/>
                                         </LinkedinShareButton>
                                 </Card.Footer>
                             </Card>

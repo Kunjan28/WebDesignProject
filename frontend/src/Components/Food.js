@@ -54,7 +54,7 @@ class Food extends Component {
   render() {
 
     return (
-      <Container>
+      <Container style={{ 'minHeight': '100vh' }}>
         <Row className="dropdown" >
           <Carousel className="carouse" fade={true}>
             <Carousel.Item interval={2000} >

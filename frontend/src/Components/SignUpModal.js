@@ -199,7 +199,7 @@ export default class SignUpModal extends Component {
 
   render() {
     return (
-      <Container id="container">
+      <Container id="container" style={{ 'minHeight': '100vh' }}>
         <Row>
           <div className="text-center pt-3 h1">
             Join Us!!

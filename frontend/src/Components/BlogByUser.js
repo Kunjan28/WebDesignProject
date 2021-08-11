@@ -183,10 +183,10 @@ class  BlogByUser extends Component{
                                 </ListGroup>
 
                                     < FacebookShareButton className='footer-icon' url={'http://localhost:3000/#/post/'+post._id}>
-                                      <FacebookIcon logoFillColor="white" size ={33} round/>
+                                      <FacebookIcon size ={33} round/>
                                         </FacebookShareButton>
                                         < LinkedinShareButton className='footer-icon' url={'http://localhost:3000/#/post/'+post._id}>
-                                      <LinkedinIcon logoFillColor="white" size ={33} round/>
+                                      <LinkedinIcon  size ={33} round/>
                                         </LinkedinShareButton>
                                 </Card.Footer>
                             </Card>
