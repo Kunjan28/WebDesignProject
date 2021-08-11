@@ -9,6 +9,8 @@ body {
 
 .navbar-text{
     color: #e0e8f0 !important;
+    display: flex !important;
+    justify-content: center !important;
     &:hover{
         background-color: #e0e8f0 !important;
         color: #04060F !important;

@@ -25,6 +25,7 @@ class  BlogByUser extends Component{
                     blog.commentVisibility='none'
                     blog.buttonText = 'See Comments'
                     blog.currentComment=''
+                    blog.view='View More ↓'
                 }
                 this.setState({blogs: fullblogs, showBlogs: fullblogs})
                 this.setState((currentState) => ({
@@ -61,7 +62,16 @@ class  BlogByUser extends Component{
                                 
                                 <Card.Text className='blog-card-text'>
                                 {
-                                        post.content.split("\n").map((line) => {
+                                    post.view!=='View Less ↑'
+                                    ?post.content.slice(0,Math.min(post.content.length, 200)).split("\n").map((line) => {
+                                        return (
+                                            <span>
+                                                {line}
+                                                <br />
+                                            </span>
+                                         )
+                                    })
+                                    :post.content.split("\n").map((line) => {
                                             return (
                                                 <span>
                                                     {line}
@@ -71,6 +81,21 @@ class  BlogByUser extends Component{
                                         })
                                     }
                                 </Card.Text>
+                                <NavLink
+                                onClick={(e)=> {
+                                    this.setState( (currentState) => ({
+                                        blogs: currentState.blogs.map((c)=> {
+                                            if(c.view==='View Less ↑'){
+                                                c.view='View More ↓'
+                                            }
+                                            else{
+                                                c.view='View Less ↑'
+                                            }
+                                            return c
+                                        } )
+                                    }))
+                                }}
+                                >{post.view}</NavLink>
                                     
                                 <Card.Subtitle className="mb-2 text-end blog-card-subtitle">Posted on: {post.postDate}</Card.Subtitle>
                                 

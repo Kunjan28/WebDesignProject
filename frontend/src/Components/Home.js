@@ -16,7 +16,7 @@ class Home extends Component{
             blogs: [],
             showBlogs: [],
             reload:1,
-            tagsList:['All','Sports','Food','Travel','Movies','Tech','Funny','Miscellaneous'],
+            tagsList:['All','Solo Travel','Adenture Sports','Travel Life Hacks','Backpacking','Hikes','Budget Travel', 'Special Diet','Recipies','Miscellaneous'],
             selectedTag:'All',
             currentUser: localStorage.getItem("user") !== null && localStorage.getItem("user") !== undefined
                     ? JSON.parse(localStorage.getItem("user")).userName

@@ -16,7 +16,7 @@ class Blog extends Component{
             heading:'',
             content:'',
             postTag:'Select Tag',
-            tagsList:['Sports','Food','Travel','Movies','Tech','Funny','Miscellaneous'],
+            tagsList:['All','Solo Travel','Adenture Sports','Travel Life Hacks','Backpacking','Hikes','Budget Travel', 'Special Diet','Recipies','Miscellaneous'],
             selectedTag:'none',
             userName: localStorage.getItem("user") !== null && localStorage.getItem("user") !== undefined
             ? JSON.parse(localStorage.getItem("user")).userName
@@ -74,19 +74,19 @@ class Blog extends Component{
                     Stuff
                     </Col>
                     <Col xs={8} md={8}>
-                        <Form.Label>Write something</Form.Label>
+                        <Form.Label><h5>Write something</h5></Form.Label>
                     </Col>
                     <Col xs={3} md={3}>
                     <Dropdown className="d-flex justify-content-center">
-                              <Dropdown.Toggle className='dropdown-tag' variant="success" id="dropdown-basic" >
-                                {this.state.postTag}
+                              <Dropdown.Toggle className='dropdown-tag' id="dropdown-basic" >
+                                {<b>{this.state.postTag}</b>}
                               </Dropdown.Toggle>
             
-                              <Dropdown.Menu>
+                              <Dropdown.Menu className='dropdown-menu'>
                                   {this.state.tagsList.map((tag)=>(
                                       <Dropdown.Item className='dropdown-item-tag' 
                                       onClick={(e)=>{this.setState({postTag:tag})}} 
-                                      key={tag}>{tag}</Dropdown.Item>
+                                      key={tag}>{<b>{tag}</b>}</Dropdown.Item>
                                   ))}
                               </Dropdown.Menu>
                             </Dropdown>
@@ -100,6 +100,7 @@ class Blog extends Component{
                         <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                         <Form.Control
+                            style={{backgroundColor:'#e0e8f0', color:'#00293c', border: '1px solid #00293c'}}
                             as="textarea" rows={1}
                             placeholder='Title of the blog'
                             value={this.state.heading}
@@ -120,6 +121,7 @@ class Blog extends Component{
                     <Form onSubmit={formSubmit}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea2">
                             <Form.Control as="textarea" 
+                            style={{backgroundColor:'#e0e8f0', color:'#00293c', border: '1px solid #00293c'}}
                             rows={this.state.rowLength}
                             placeholder='Content goes here'
                             value={this.state.content}
