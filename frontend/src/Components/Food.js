@@ -68,7 +68,7 @@ class Food extends Component {
                 <h2 >Italian</h2>
                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </div>
-                <button className="btn btn-lg btn-secondary" value="italian" onClick={(e) => this.cuisineChange(e)} >
+                <button className="btn btn-lg btn-primary" value="italian" onClick={(e) => this.cuisineChange(e)} >
                   Search Restaurants
                 </button>
               </Carousel.Caption>
@@ -83,7 +83,7 @@ class Food extends Component {
               <Carousel.Caption>
                 <h3>Mexican</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <button className="btn btn-lg btn-secondary" value="mexican" onClick={(e) => this.cuisineChange(e)} >
+                <button className="btn btn-lg btn-primary" value="mexican" onClick={(e) => this.cuisineChange(e)} >
                 Search Restaurants
                 </button>
               </Carousel.Caption>
@@ -100,7 +100,7 @@ class Food extends Component {
                 <h3>Korean</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-                <button className="btn btn-lg btn-secondary" value="korean" onClick={(e) => this.cuisineChange(e)} >
+                <button className="btn btn-lg btn-primary" value="korean" onClick={(e) => this.cuisineChange(e)} >
                 Search Restaurants
                 </button>
               </Carousel.Caption>
@@ -117,7 +117,7 @@ class Food extends Component {
                 <h3>Indian</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-                <button className="btn btn-lg btn-secondary" value="indian" onClick={(e) => this.cuisineChange(e)} >
+                <button className="btn btn-lg btn-primary" value="indian" onClick={(e) => this.cuisineChange(e)} >
                 Search Restaurants
                 </button>
 
@@ -134,7 +134,7 @@ class Food extends Component {
                 <h3>American</h3>
                 <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
 
-                <button className="btn btn-lg btn-secondary" value="american" onClick={(e) => this.cuisineChange(e)} >
+                <button className="btn btn-lg btn-primary" value="american" onClick={(e) => this.cuisineChange(e)} >
                 Search Restaurants
                 </button>
               </Carousel.Caption>

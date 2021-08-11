@@ -50,12 +50,15 @@ body {
   
   .paginationBttns a:hover {
     color: black;
-    background-color: gray;
+    /* background-color: gray; */
+    background-color: rgb(52, 107, 158);
   }
   
   .paginationActive a {
     color: black;
-    background-color: gray;
+    /* background-color: gray; */
+    background-color: rgb(52, 107, 158);
+
   }
   
   .paginationDisabled a {
