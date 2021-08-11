@@ -71,7 +71,7 @@ class Advertisements extends Component{
 
     render(){
         return(
-            <Card className='adv-main' style={{ width: '18rem' }}>
+            <Card className='adv-main' >
               <Card.Body>
                 <Card.Title className="adv-title">{this.state.advertisements[this.state.value].title}</Card.Title>
                 <Card.Text className="adv-heading">
