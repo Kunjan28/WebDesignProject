@@ -71,7 +71,8 @@ export default class LoginModal extends Component {
     let emailIdError = "";
     let passwordError = "";
     var emailRegex = /([\w\.]+)@([\w\.]+)\.(\w+)/;
-    var passwordRegex = /^[A-Za-z]\w{7,14}$/;
+    // var passwordRegex = /^[A-Za-z]\w{7,14}$/;
+    var passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
 
     switch (name) {
       case "emailId":
