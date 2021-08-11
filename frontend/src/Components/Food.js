@@ -64,10 +64,14 @@ class Food extends Component {
                 alt="First slide"
               />
               <Carousel.Caption>
-                <div className="closecc" >
-                <h2 >Italian</h2>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                <div className="closecc" style={{ float: "center" }}>
+                  <span className="span_t" style={{ fontSize: "35px", background: "black" }}>
+                    Italian</span><br></br>
+                  <span className="span_t" style={{ background: "black" }}>
+                    The Italian Dishes to bring you the treasures of Italy and all of Europe
+                  </span>
                 </div>
+                <br></br>
                 <button className="btn btn-lg btn-primary" value="italian" onClick={(e) => this.cuisineChange(e)} >
                   Search Restaurants
                 </button>
@@ -81,10 +85,15 @@ class Food extends Component {
                 alt="Second slide"
               />
               <Carousel.Caption>
-                <h3>Mexican</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div className="closecc" style={{ float: "center" }}>
+                  <span className="span_t" style={{ fontSize: "35px", background: "black" }}>
+                    Mexican</span><br></br>
+                  <span className="span_t" style={{ background: "black" }}>
+                    Authentic Mexican food is more than tacos and salsa. Check out our favorite Mexican dishes                </span>
+                </div><br></br>
+
                 <button className="btn btn-lg btn-primary" value="mexican" onClick={(e) => this.cuisineChange(e)} >
-                Search Restaurants
+                  Search Restaurants
                 </button>
               </Carousel.Caption>
             </Carousel.Item>
@@ -97,11 +106,16 @@ class Food extends Component {
                 alt="Second slide"
               />
               <Carousel.Caption>
-                <h3>Korean</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div className="closecc" style={{ float: "center" }}>
+                  <span className="span_t" style={{ fontSize: "35px", background: "black" }}>
+                    Korean</span><br></br>
+                  <span className="span_t" style={{ background: "black" }}>
+                    Korean cuisine is largely based on rice, vegetables, seafood. Try out some delicacies.
+                  </span>
+                </div><br></br>
 
                 <button className="btn btn-lg btn-primary" value="korean" onClick={(e) => this.cuisineChange(e)} >
-                Search Restaurants
+                  Search Restaurants
                 </button>
               </Carousel.Caption>
             </Carousel.Item>
@@ -114,11 +128,14 @@ class Food extends Component {
                 alt="fourth slide"
               />
               <Carousel.Caption>
-                <h3>Indian</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
+                <div className="closecc" style={{ float: "center" }}>
+                  <span className="span_t" style={{ fontSize: "35px", background: "black" }}>
+                    Indian</span><br></br>
+                  <span className="span_t" style={{ background: "black" }}>
+                    Try out the diverse Indian cuisine which consists of a variety of regional and traditional cuisines native to the Indian subcontinent.                  </span>
+                </div><br></br>
                 <button className="btn btn-lg btn-primary" value="indian" onClick={(e) => this.cuisineChange(e)} >
-                Search Restaurants
+                  Search Restaurants
                 </button>
 
               </Carousel.Caption>
@@ -131,11 +148,15 @@ class Food extends Component {
                 alt="fifth slide"
               />
               <Carousel.Caption>
-                <h3>American</h3>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-
+                <div className="closecc" style={{ float: "center" }}>
+                  <span className="span_t" style={{ fontSize: "35px", background: "black" }}>
+                    American</span><br></br>
+                  <span className="span_t" style={{ background: "black" }}>
+                  Try out some American Cuisine. The World's Culinary Melting Pot ifluenced by indigenous American Indians, African Americans and Asians.
+                    </span>
+                </div><br></br>
                 <button className="btn btn-lg btn-primary" value="american" onClick={(e) => this.cuisineChange(e)} >
-                Search Restaurants
+                  Search Restaurants
                 </button>
               </Carousel.Caption>
             </Carousel.Item>
