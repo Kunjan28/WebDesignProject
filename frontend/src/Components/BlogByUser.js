@@ -63,8 +63,8 @@ class  BlogByUser extends Component{
                                 
                                 <Card.Text className='blog-card-text'>
                                 {
-                                    post.view!=='View Less ↑'
-                                    ?post.content.slice(0,Math.min(post.content.length, 200)).split("\n").map((line) => {
+                                    post.view!=='View Less ↑' && post.content.length > 200
+                                    ?(post.content.slice(0,Math.min(post.content.length, 200))+'......').split("\n").map((line) => {
                                         return (
                                             <span>
                                                 {line}
