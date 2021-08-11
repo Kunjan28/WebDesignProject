@@ -74,5 +74,3 @@
 .form_1 input:focus + .label-name::after, .form_1 input:valid + .label-name::after{
     transform: translateX(0%);
 }
-
-

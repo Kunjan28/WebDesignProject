@@ -18,7 +18,7 @@ body {
 }
 
 .btn-primary{
-    background-color: lightsteelblue ;
+    background-color: #013449;
     border: none;
     text-align: left;
   }
@@ -26,9 +26,6 @@ body {
 .btn-primary:hover{
     opacity: 1;
 }
-
-
-
 
 .paginationBttns {
     width: 80%;

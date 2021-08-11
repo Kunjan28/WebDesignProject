@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Container, Row, Image, Carousel, Col, Form, Dropdown, Card, Button, CardGroup, Header } from "react-bootstrap";
+import { Container, Row, Image, Carousel, Col, collapse, Form, Dropdown, Card, Button, CardGroup, Header } from "react-bootstrap";
 import "./Cusines.css";
 import ReactPaginate from "react-paginate";
 
 
 const DOCUMENU_API_KEY = "cff91f44c684a03c1b4d509c5085c946";
-const SPOONACULAR_API_KEY = "35e286a7691b4428a225021312a7b9de";
+const SPOONACULAR_API_KEY = "9644f3c958834411aa07e947c410b7b5";
 
 class Cuisine extends Component {
 
@@ -15,32 +15,32 @@ class Cuisine extends Component {
             restaurants: [],
             recipes: [],
             pageNumber: 0,
-            pageCount:0,
+            pageCount: 0,
             usersPerPage: 5,
             pagesVisited: 0
         }
 
-        this.scrollRef = React.createRef()  
+        this.scrollRef = React.createRef()
     }
 
 
     getRestaurantData = async (e) => {
-        const api_call = await fetch(`https://api.documenu.com/v2/restaurants/search/geo?lat=${this.props.lat}&lon=${this.props.lon}&distance=10&cuisine=${this.props.cuisine}&key=${DOCUMENU_API_KEY}`);
+        const api_call = await fetch(`https://api.documenu.com/v2/restaurants/search/geo?lat=${this.props.lat}&lon=${this.props.lon}&distance=11&cuisine=${this.props.cuisine}&key=${DOCUMENU_API_KEY}`);
         const result = await api_call.json();
         let resPageCount = Math.ceil(result.data.length / this.state.usersPerPage);
         this.setState({ restaurants: result.data, pageCount: resPageCount });
     }
 
     getSpoonacularRecipes = async (e) => {
-        const api_call = await fetch(`https://api.spoonacular.com/recipes/complexSearch?cuisine=${this.props.cuisine}&number=5&addRecipeInformation=true&apiKey=${SPOONACULAR_API_KEY}`);
+        const api_call = await fetch(`https://api.spoonacular.com/recipes/complexSearch?cuisine=${this.props.cuisine}&number=4&addRecipeInformation=true&apiKey=${SPOONACULAR_API_KEY}`);
         const result = await api_call.json();
         this.setState({ recipes: result.results });
     }
 
     componentDidUpdate(prevProps, prevState) {
         console.log(prevState, this.state)
-        if(prevState.pageNumber !== this.state.pageNumber){
-            let newPagesVisited = this.state.usersPerPage*this.state.pageNumber;
+        if (prevState.pageNumber !== this.state.pageNumber) {
+            let newPagesVisited = this.state.usersPerPage * this.state.pageNumber;
             console.log(newPagesVisited)
             this.setState({ pagesVisited: newPagesVisited });
         }
@@ -53,7 +53,7 @@ class Cuisine extends Component {
     changePage = ({ selected }) => {
         // console.log(selected)
         this.setState({ "pageNumber": selected });
-        this.scrollRef.current.scrollIntoView(); 
+        this.scrollRef.current.scrollIntoView();
     }
 
     render(props) {
@@ -85,8 +85,8 @@ class Cuisine extends Component {
                                 </div>
                             })}
                         <br></br>
-                        
-                        {this.state.restaurants.length > 0?<ReactPaginate
+
+                        {this.state.restaurants.length > 0 ? <ReactPaginate
                             previousLabel={"Previous"}
                             nextLabel={"Next"}
                             pageCount={(Math.ceil((this.state.restaurants.length) / this.usersPerPage))}
@@ -97,7 +97,7 @@ class Cuisine extends Component {
                             nextLinkClassName={"nextBtn"}
                             disabledClassName={"paginationDisabled"}
                             activeClassName={"paginationActive"}
-                        />:""}
+                        /> : ""}
 
                     </Col>
 
@@ -109,13 +109,9 @@ class Cuisine extends Component {
                                 <Card.Body>
                                     <Card.Title>{recipe.title}</Card.Title>
                                     <Card.Text>
-                                        {/* {recipe.summary} */}
                                         <div dangerouslySetInnerHTML={{ __html: recipe.summary }} />
                                     </Card.Text>
                                 </Card.Body>
-                                <Card.Footer className="text-muted">
-                                    <a className="btn btn-primary" href={recipe.sourceUrl} role="button" target="_blank">Visit website</a>
-                                </Card.Footer>
                             </Card>
                                 <br></br>
                             </div>

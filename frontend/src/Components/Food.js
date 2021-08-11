@@ -4,7 +4,7 @@ import Cuisine from "./Cusines/Cuisine";
 import "./Food";
 
 
-const SPOONACULAR_API_KEY = "adef6fa141fa432796e6d6a8aaa8d63b";
+const SPOONACULAR_API_KEY = "28104b06b04e433a8d9847a50eff9c65";
 
 class Food extends Component {
 
