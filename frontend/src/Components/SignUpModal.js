@@ -111,7 +111,8 @@ export default class SignUpModal extends Component {
     var regExUserName = /^[a-zA-Z0-9]+$/;
     var regExPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
     var emailRegex = /([\w\.]+)@([\w\.]+)\.(\w+)/;
-    var passwordRegex = /^[A-Za-z]\w{7,14}$/;
+    // var passwordRegex = /^[A-Za-z]\w{7,14}$/;
+    var passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
 
     switch (name) {
       case "first_name":
@@ -176,7 +177,8 @@ export default class SignUpModal extends Component {
           this.setState({ passwordError });
 
         } else {
-          passwordError = "Password should 7 to 15 characters and first character must be a letter]"
+          // Input Password and Submit [7 to 15 characters which contain at least one numeric digit and a special character]
+          passwordError = "Password should contain 7 to 15 characters and atleast one numeric digit and a special character"
           this.setState({ passwordError });
 
         }
@@ -292,7 +294,7 @@ export default class SignUpModal extends Component {
                 &nbsp;
                 <Link to="/login"> Log in</Link>
               </span>
-            </div>
+            </div><br></br>
 
           </Form>
         </Row>
