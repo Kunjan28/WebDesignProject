@@ -25,6 +25,7 @@ class Map extends React.Component {
 			placeData: [],
 			search: "", clippedSearch: "Hawaii"
 		}
+		this.divmap=React.createRef()
 	}
 
 	// To load initial data
@@ -88,6 +89,12 @@ class Map extends React.Component {
 		this.setState({ clippedSearch: this.state.search })
 		console.log('Csearch' + this.state.clippedSearch)
 		this.fetchCoordinatesByPlace(this.state.search);
+		if(this.divmap.current){
+            this.divmap.current.scrollIntoView({ 
+               behavior: "smooth", 
+               block: "nearest"
+            })
+        }
 	}
 
 	fetchCoordinatesByPlace = (placeName) => {
@@ -150,7 +157,7 @@ class Map extends React.Component {
 
 
 				{/* Image with Searchbar */}
-				<div style={{ backgroundImage: `url(${travelImg})`, backgroundSize:'cover',width: `100%`, height: `700px` }}>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style={{ backgroundImage: `url(${travelImg})`, backgroundSize:'cover', WebkitBackgroundSize:`cover`,MozBackgroundSize:`cover`,oBackgroundSize: `cover`,maxHeight: `600px`,minHeight: `600px`, minWidth:`100%`}}>
 
 					<InputGroup style={{ maxWidth: `80%`, height:'25%', paddingTop:'7%', paddingLeft:'20%' }}>
 						<FormControl
@@ -160,7 +167,8 @@ class Map extends React.Component {
 							value={this.state.city}
 							onInput={this.onChange}
 						/>
-						<Button style={{ backgroundColor:'#00293c', width: '15%'}} variant="outline-primary" active onClick={this.onSubmit}>
+						
+						<Button style={{ backgroundColor:'#00293c'}} variant="outline-primary" active onClick={this.onSubmit}>
 							Search
 						</Button>
 					</InputGroup>
@@ -169,7 +177,7 @@ class Map extends React.Component {
 
 
 				{/* Map with desc */}
-				<div style={{ backgroundColor: `#00293c` }}>
+				<div ref={this.divmap} style={{ backgroundColor: `#00293c` }}>
 					<div className="row">
 
 						<div class="col-md-5" style={{ margin: '1%' }} >

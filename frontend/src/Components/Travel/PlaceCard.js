@@ -14,6 +14,9 @@ const PlaceCard = ({ placeDetails }) => {
     return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=960&photoreference=${photos[0].photo_reference}&key=AIzaSyBJd54lkWdNgrJVYKp4Oqr2YUSkfScT5Rg`;
   }
 
+  const getStars=()=>{
+
+  }
 
 
   return (
@@ -23,12 +26,12 @@ const PlaceCard = ({ placeDetails }) => {
       ? <div></div>
       :
       (
-        <div style={{margin: '5px' }} >
-          <div class="card" style={{ maxWidth: `500px` }}>
-            <img class="card-img-top"  style={{ maxWidth: `500px`, maxHeight:'300px', minWidth: '500px', minHeight:'300px' }} src={getImage(placeDetails.photos)}></img>
-            <div class="card-body">
-              <h5 class="card-title">{placeDetails.name}</h5>
-              <p class="card-text"> Ratings:{placeDetails.rating} &nbsp;&nbsp;
+        <div class="col-md-4" style={{display:`flex`}}>
+          <div class="card" style={{ maxWidth: `100%`,maxHeight:`500px`,minWidth:`100%`,minHeight:`500px`,padding:`1%` }}>
+            <img class="card-img-top" src={getImage(placeDetails.photos)} style={{minHeight:`70%`,maxHeight:`70%` }}></img>
+            <div class="card-body" style={{fontFamxily:`cursive`, fontVariant:`historical-forms`,fontWeight:`bolder`,backgroundColor:`white`, hover:{backgroundColor:`grey`}}}>
+              <h5 class="card-title" style={{color:`00293c`,fontWeight:`bolder`}}>{placeDetails.name}</h5>
+              <p class="card-text">Ratings:{placeDetails.rating} &nbsp;&nbsp;
                 User Ratings:{placeDetails.user_ratings_total}</p>
               <p class="card-text">Vicinity:{placeDetails.vicinity}</p>
             </div>
