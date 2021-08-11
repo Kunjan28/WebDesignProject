@@ -5,7 +5,7 @@ import ReactPaginate from "react-paginate";
 
 
 const DOCUMENU_API_KEY = "8bd90611f6aede9c5e4388278c80a250";
-const SPOONACULAR_API_KEY = "2b3a60a05f7d493d9bdd48f12eeee0b3";
+const SPOONACULAR_API_KEY = "f66d3ffd449348c1896a65015f3f85e9";
 
 class Cuisine extends Component {
 
@@ -56,13 +56,18 @@ class Cuisine extends Component {
         this.scrollRef.current.scrollIntoView();
     }
 
+    capitalize(str){
+        return str.charAt(0).toUpperCase() + str.slice(1)
+    }
+
     render(props) {
         return (
             <div className="Cusines">
                 <Row ref={this.scrollRef} className="rows">
                     <Col className="columns" md={8}>
                         {this.state.restaurants.length > 0 ?
-                            <h1>Nearby {this.props.cuisine} Restaurants</h1> :
+                            <h1>Nearby {this.capitalize(this.props.cuisine)} Restaurants</h1> :
+                            // <h1>Nearby {this.props.cuisine} Restaurants</h1> :
                             <p></p>}
                         {this.state.restaurants
                             .slice(this.state.pagesVisited, (this.state.pagesVisited + this.state.usersPerPage))
