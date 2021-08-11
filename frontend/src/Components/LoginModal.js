@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Modal, Row, Col, Container, Button, Form } from "react-bootstrap";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import AuthService from "../services/auth.services";
 export default class LoginModal extends Component {
@@ -109,8 +109,12 @@ export default class LoginModal extends Component {
 
 
       <Container id="container" style={{ 'minHeight': '100vh' }}>
-        <Row>
 
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <Row>
           <div className="text-center pt-3 h1">
             Log In!!
           </div>

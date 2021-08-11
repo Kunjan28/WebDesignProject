@@ -177,7 +177,6 @@ export default class SignUpModal extends Component {
           this.setState({ passwordError });
 
         } else {
-          // Input Password and Submit [7 to 15 characters which contain at least one numeric digit and a special character]
           passwordError = "Password should contain 7 to 15 characters and atleast one numeric digit and a special character"
           this.setState({ passwordError });
 
