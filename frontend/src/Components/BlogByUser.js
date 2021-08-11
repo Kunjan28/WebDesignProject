@@ -13,6 +13,7 @@ class  BlogByUser extends Component{
         this.state = {
             blogs:[],
             showBlogs:[],
+            loading:true
         }
     }
 
@@ -31,7 +32,7 @@ class  BlogByUser extends Component{
                 this.setState((currentState) => ({
                     showBlogs: currentState.blogs.filter((c) => c.userName === this.props.userName )
                 }))
-                this.setState({showBlogs: this.state.showBlogs.reverse()})
+                this.setState({showBlogs: this.state.showBlogs.reverse(), loading:false})
 
                 console.log('mounted')
                 console.log(this.state)
@@ -47,7 +48,7 @@ class  BlogByUser extends Component{
                     My posts
                 </h1>
                 {
-                    this.state.showBlogs.length === 0
+                    this.state.loading === true
                     ? <Loading />
                     : this.state.showBlogs.map((post)=>{
                         return(
