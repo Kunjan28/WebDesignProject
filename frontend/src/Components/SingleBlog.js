@@ -6,9 +6,25 @@ import { LinkedinShareButton, LinkedinIcon } from "react-share";
 import './blogs.scss'
 
 class SingleBlog extends Component{
+    constructor(props){
+        super(props)
+        this.state ={
+            commentVisibility: 'none',
+            buttonText: 'See Comments',
+            comments:[],
+            currentComment:''
+        }
+    }
+
+    componentDidMount(){
+        this.setState({commentVisibility: this.props.blog.commentVisibility, buttonText: this.props.blog.buttonText})
+        this.setState({comments:this.props.blog.comments})
+        this.setState({currentComment:this.props.blog.currentComment})
+    }
+
     render(){
         const post = this.props.blog
-        console.log(post.content)
+        console.log(this.props.blog)
         return(
             <div>
             <Card className='blog-card' key = {post._id} style={{ width: '100%' }}>
@@ -41,34 +57,27 @@ class SingleBlog extends Component{
                               style={localStorage.getItem("user")=== null? {display:'none'}:{display:'block'}}
                               onClick={
                                   (e) => {
-                                      this.setState( (currentState) => ({
-                                          blogs: currentState.blogs.map( (c) =>{
-                                              if(c.title === post.title) {
-                                                  if(c.commentVisibility === 'block') {
-                                                      c.commentVisibility='none'
-                                                      c.buttonText='See Comments'
-                                                  }
-                                                  else {
-                                                      c.commentVisibility='block'
-                                                      c.buttonText='Hide Comments'
-                                                  }
-                                              }
-                                              return c
-                                          })
-                                      }))
+
+                                    if(this.state.commentVisibility==='block'){
+                                        this.setState({commentVisibility:'none', buttonText:'See Comments'})
+                                    }
+                                    else{
+                                        this.setState({commentVisibility:'block', buttonText:'Hide Comments'})
+                                    }
                                   }
-                              }>{post.buttonText}
+                              }>{this.state.buttonText}
                               </Button>
 
-                              <ListGroup variant="flush" style={{display:post.commentVisibility}}>
+                              <ListGroup variant="flush" style={{display:this.state.commentVisibility}}>
                                   {
-                                      post.comments.length === 0
+                                      this.state.comments.length === 0
                                       ? <div>No comments</div>
-                                      : post.comments.map((comment) => {
+                                      : this.state.comments.map((comment) => {
+                                          console.log(comment)
                                           return <ListGroup.Item className="comment-list" key ={comment._id}>
                                               <Card className="comment-card">
                                                       <Card.Subtitle className="comment-sub">
-                                                          {comment.userName}
+                                                          {this.props.userName}
                                                       </Card.Subtitle >
                                                       <Card.Text className="comment-text">
                                                           {comment.comment}
@@ -83,36 +92,23 @@ class SingleBlog extends Component{
                                               className='form-comment'
                                               type="text" 
                                               placeholder="Write a comment"
-                                              value={post.currentComment}
+                                              value={this.props.currentComment}
                                               onChange={(e)=>{
-                                                  this.setState( (currentState) => ({
-                                                      blogs: currentState.blogs.map((c) =>{
-                                                          if(c.title === post.title) {
-                                                              c.currentComment=e.target.value
-                                                          }
-                                                          return c
-                                                      })
-                                                  }))
+                                                  this.setState({currentComment:e.target.value})
                                               }} />
                                           </Form.Group>
                                           <Button
                                           className='btn-sm btn-reply'
                                           onClick = {(e)=>{
-                                              BlogServices.addPostComment(post._id, this.props.userName,post.currentComment).then( () =>{
+                                              BlogServices.addPostComment(post._id, this.props.userName,this.props.currentComment).then( () =>{
                                                   // window.location.reload();
                                               },error =>{
                                                   console.log('error commenr')
                                               })
-                                              this.setState((currentState) => ({
-                                                  blogs: currentState.blogs.map((c) =>{
-                                                      if(c.title === post.title) {
-                                                          c.comments = c.comments.concat([{userName:c.userName, comment:c.currentComment}])
-                                                          console.log(c.comments)
-                                                          c.currentComment=''
-                                                      }
-                                                      return c
-                                                  })
+                                              this.setState((currentState)=>({
+                                                  comments: currentState.comments.concat([{userName:this.props.userName, comment:this.props.currentComment}])
                                               }))
+                                              
                                           }}
                                           > Reply</Button>
                                       </Form>    

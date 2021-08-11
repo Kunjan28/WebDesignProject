@@ -174,7 +174,7 @@ class  BlogWithTag extends Component{
                                                 this.setState((currentState) => ({
                                                     blogs: currentState.blogs.map((c) =>{
                                                         if(c._id === post._id) {
-                                                            c.comments = c.comments.concat([{userName:c.userName, comment:c.currentComment}])
+                                                            c.comments = c.comments.concat([{userName:this.props.userName, comment:c.currentComment}])
                                                             console.log(c.comments)
                                                             c.currentComment=''
                                                         }

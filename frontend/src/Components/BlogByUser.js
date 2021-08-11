@@ -148,7 +148,7 @@ class  BlogByUser extends Component{
                                             <Form.Group className="mb-3" controlId="formFirstName">
                                                 <Form.Control 
                                                 className='form-comment'
-                                                type="text" 
+                                                type="text"
                                                 placeholder="Write a comment"
                                                 value={post.currentComment}
                                                 onChange={(e)=>{
@@ -173,7 +173,7 @@ class  BlogByUser extends Component{
                                                 this.setState((currentState) => ({
                                                     blogs: currentState.blogs.map((c) =>{
                                                         if(c.title === post.title) {
-                                                            c.comments = c.comments.concat([{userName:c.userName, comment:c.currentComment}])
+                                                            c.comments = c.comments.concat([{userName:this.props.userName, comment:c.currentComment}])
                                                             console.log(c.comments)
                                                             c.currentComment=''
                                                         }

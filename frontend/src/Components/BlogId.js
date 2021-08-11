@@ -11,7 +11,10 @@ class BlogId extends Component{
         this.state ={
             blog: undefined,
             id : this.props.match.params.id,
-            loaded: false
+            loaded: false,
+            currentUser: localStorage.getItem("user") !== null && localStorage.getItem("user") !== undefined
+                    ? JSON.parse(localStorage.getItem("user")).userName
+                    : ''
         }
     }
 
@@ -24,6 +27,8 @@ class BlogId extends Component{
                 blog.commentVisibility='none'
                 blog.buttonText = 'See Comments'
                 blog.currentComment=''
+                console.log('hi')
+                console.log(blog.comments)
                 this.setState({blog:blog, loaded:true})
             }
         )
@@ -36,7 +41,7 @@ class BlogId extends Component{
                 {
                     this.state.loaded === false
                     ? <Loading />
-                    : <SingleBlog blog = {this.state.blog}/>
+                    : <SingleBlog blog = {this.state.blog} userName={this.state.currentUser}/>
                 }
             </Container>
         )
