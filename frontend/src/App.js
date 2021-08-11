@@ -12,6 +12,7 @@ import TopNav from './Components/TopNav';
 import BlogId from './Components/BlogId';
 import Footer from './Components/Footer/footer';
 import SocialMedia from './Components/SocialMedia.js/SocialMedia';
+import RealHome from './Components/RealHome';
 
 
 
@@ -56,12 +57,13 @@ class App extends Component{
 		return(
             <HashRouter>
 				<TopNav/>
-              
-				<Route exact path ='/' component={Home}/>
-				<Route path ='/home' component={ Home} />
+                
+				<Route exact path ='/' component={RealHome}/>
+				<Route path ='/home' component={ RealHome} />
 				<Route path ='/travel' component={Travel} />
 				<Route path ='/food' component={Food} />
-				<Route path ='/blog' component={ (props) => <Blog credentials= {this.state.credentials} blogs={this.state.blogs} writeBlog = {(details)=>this.writeBlog(details)}/>} />				
+                <Route path ='/blog' component={Home} />
+				<Route path ='/myblogs' component={ (props) => <Blog credentials= {this.state.credentials} blogs={this.state.blogs} writeBlog = {(details)=>this.writeBlog(details)}/>} />				
 				<Route exact path="/login" component={LoginModal} />
                 <Route path="/signup" component={SignUpModal} />
                 <Route exact path="/post/:id" component={BlogId} />

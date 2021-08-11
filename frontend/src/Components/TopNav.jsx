@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Nav, Navbar, Form , FormControl, Button} from 'react-bootstrap';
+import { Container, Nav, Navbar, Form , FormControl, Button, NavDropdown} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 import AuthService from "../services/auth.services";
@@ -30,13 +30,19 @@ const TopNav = () => {
 					    navbarScroll
 					  >
 					    <Nav.Link activeClassName="active" className='navbar-text' href="#home">Home</Nav.Link>
+              <Nav.Link activeClassName="active" className='navbar-text' href="#food">Food</Nav.Link>
 					    <Nav.Link activeClassName="active" className='navbar-text' href="#travel">Travel</Nav.Link>
-						<Nav.Link activeClassName="active" className='navbar-text' href="#food">Food</Nav.Link>
-						{
+              {/* <Nav.Link activeClassName="active" className='navbar-text' href="#blog">Blogs</Nav.Link> */}
+              <NavDropdown className='navbar-text' href="#blog" title="Blogging" id="basic-nav-dropdown">
+              <NavDropdown.Item className='navbar-text' href="#blog">Blogs</NavDropdown.Item>
+                <NavDropdown.Item className='navbar-text' href="#myblogs">My Blogs</NavDropdown.Item>
+                  
+                </NavDropdown>
+						{/* {
 							localStorage.getItem('user') === null
 							? <Nav.Link activeClassName="active" className='navbar-text' href="#blog" disabled>My Blog</Nav.Link>
 							: <Nav.Link activeClassName="active" className='navbar-text' href="#blog">My Blogs</Nav.Link>
-						}
+						} */}
                         {!localStorage.getItem('user') ?
               <Nav.Link to="/signup" activeClassName='active' as={NavLink} className="button_sign navbar-text"><li>
                 Sign Up
